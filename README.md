@@ -1,15 +1,8 @@
-# DOCUMENTATION:
-Please read the documentation here: http://bit.ly/ionicthemes-ionwordpress
-
-
-### To prepare the apk to upload to Google Play (see: http://ionicframework.com/docs/guide/publishing.html)
-
-
 Your Ionic project is ready to go! Some quick tips:
 
 * cd into your project:
 ```
-cd ionwordpress
+cd skyacademyapp
 ```
 
 * Setup this project to use Sass:
