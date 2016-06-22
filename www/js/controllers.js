@@ -1,4 +1,4 @@
-angular.module('your_app_name.controllers', [])
+angular.module('skyacademyapp.controllers', [])
 
 // APP - RIGHT MENU
 .controller('AppCtrl', function($scope, AuthService) {

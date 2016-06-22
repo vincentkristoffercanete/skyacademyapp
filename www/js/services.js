@@ -1,4 +1,4 @@
-angular.module('your_app_name.services', [])
+angular.module('skyacademyapp.services', [])
 
 // WP POSTS RELATED FUNCTIONS
 .service('PostService', function ($rootScope, $http, $q, WORDPRESS_API_URL, AuthService, BookMarkService){
