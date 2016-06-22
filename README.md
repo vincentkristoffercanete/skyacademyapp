@@ -5,6 +5,11 @@ Your Ionic project is ready to go! Some quick tips:
 cd skyacademyapp
 ```
 
+* Update dependencies:
+```
+bower update
+```
+
 * Setup this project to use Sass:
 ```
 ionic setup sass
