@@ -13,7 +13,38 @@ angular.module('skyacademyapp.controllers', [])
 
 })
    
-.controller('userCtrl', function($scope) {
+.controller('userCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService) {
+
+  // Triggered on a the logOut button click
+  $scope.showLogOutMenu = function() {
+
+    // Show the action sheet
+    var hideSheet = $ionicActionSheet.show({
+      //Here you can add some more buttons
+      // buttons: [
+      // { text: '<b>Share</b> This' },
+      // { text: 'Move' }
+      // ],
+      destructiveText: 'Logout',
+      titleText: 'Are you sure you want to logout?',
+      cancelText: 'Cancel',
+      cancel: function() {
+        // add cancel code..
+      },
+      buttonClicked: function(index) {
+        //Called when one of the non-destructive buttons is clicked,
+        //with the index of the button that was clicked and the button object.
+        //Return true to close the action sheet, or false to keep it opened.
+        return true;
+      },
+      destructiveButtonClicked: function(){
+        //Called when the destructive button is clicked.
+        //Return true to close the action sheet, or false to keep it opened.
+        AuthService.logOut();
+        $state.go('login');
+      }
+    });
+  };
 
 })
 
@@ -127,36 +158,6 @@ angular.module('skyacademyapp.controllers', [])
     $scope.credits_modal.show();
   };
 
-  // Triggered on a the logOut button click
-  $scope.showLogOutMenu = function() {
-
-    // Show the action sheet
-    var hideSheet = $ionicActionSheet.show({
-      //Here you can add some more buttons
-      // buttons: [
-      // { text: '<b>Share</b> This' },
-      // { text: 'Move' }
-      // ],
-      destructiveText: 'Logout',
-      titleText: 'Are you sure you want to logout? This app is awsome so I recommend you to stay.',
-      cancelText: 'Cancel',
-      cancel: function() {
-        // add cancel code..
-      },
-      buttonClicked: function(index) {
-        //Called when one of the non-destructive buttons is clicked,
-        //with the index of the button that was clicked and the button object.
-        //Return true to close the action sheet, or false to keep it opened.
-        return true;
-      },
-      destructiveButtonClicked: function(){
-        //Called when the destructive button is clicked.
-        //Return true to close the action sheet, or false to keep it opened.
-        AuthService.logOut();
-        $state.go('login');
-      }
-    });
-  };
 })
 
 //EMAIL SENDER
@@ -387,16 +388,26 @@ angular.module('skyacademyapp.controllers', [])
   };
 })
 
-// GET COURSES
+//COURSES
 .controller('coursesCtrl', function($scope, $rootScope, $state, $http, $ionicLoading, PostService) {
-    
     var promise = PostService.getCourses();
     promise.then(function(data){
-      $scope.courses = data;
-      console.log($scope.courses);
+      $scope.courses = data.data.units;
     });
 })
 
+//EPISODES
+.controller('EpisodesCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate) {
+  $scope.episodes = post_data.data;
+  $ionicLoading.hide();
+})
+
+//VIDEO
+.controller('VideoCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate) {
+  $scope.video = post_data.data;
+  console.log($scope.video);
+  $ionicLoading.hide();
+})
 
 // POST
 .controller('PostCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate) {

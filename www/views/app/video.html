@@ -1,0 +1,14 @@
+<ion-view title="Video" id="page6" class=" ">
+    <ion-content class="has-header">
+        <div style="position:relative;overflow:hidden;padding-bottom:56.25%;height:0;" class="video-wrapper">
+            <div ng-bind-html="video[0].content.rendered | rawHtml"></div>
+        </div>
+        <div class="padding">
+            <h4>{{video[0].title.rendered}}</h4>
+
+            <div class="description">
+            <div ng-bind-html="video[1].content.rendered | rawHtml"></div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

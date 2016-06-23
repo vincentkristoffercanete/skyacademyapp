@@ -8,9 +8,27 @@ angular.module('skyacademyapp.services', [])
     $http.get(WORDPRESS_SITE_URL + 'wp-json/acf/v2/page/2291/units')
     .then(function (data){
       deferred.resolve(data);
-    })
+    });
     return deferred.promise;
-  }
+  };
+
+  this.getEpisodes = function(courseId){
+    var deferred = $q.defer();
+    $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/unit/?filter[post_parent]='+ courseId +'&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish')
+    .then(function (data){
+      deferred.resolve(data);
+    });
+    return deferred.promise;
+  };
+
+  this.getVideo = function(videoId){
+    var deferred = $q.defer();
+    $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/module/?filter[post_parent]='+ videoId +'&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish')
+    .then(function (data){
+      deferred.resolve(data);
+    });
+    return deferred.promise;
+  };
 
   this.getRecentPosts = function(page) {
     var deferred = $q.defer();
@@ -25,7 +43,6 @@ angular.module('skyacademyapp.services', [])
     .error(function(data) {
       deferred.reject(data);
     });
-
     return deferred.promise;
   };
 

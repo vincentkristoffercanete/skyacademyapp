@@ -1,8 +1,8 @@
-<ion-view title="Courses" class="">
+<ion-view title="Courses" id="page4" class="">
     <ion-content padding="true" class="has-header">
-        <ion-list class="" ng-repeat="course in courses">
-            <ion-item class="item-icon-left">
-                <i class="icon ion-ionic"></i>{{course.post_title}}</ion-item>
+        <ion-list ng-repeat="course in courses">
+            <ion-item ui-sref="app.episodes({courseId : course.ID})" >
+                {{course.post_title}}</ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

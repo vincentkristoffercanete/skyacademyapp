@@ -135,7 +135,7 @@ angular.module('skyacademyapp', [
   })
 
   .state('app.home', {
-    url: '/home',
+    url: '/tabs',
     views: {
       'menuContent': {
         templateUrl: 'views/app/home.html',
@@ -157,6 +157,54 @@ angular.module('skyacademyapp', [
     },
     data: {
       authenticate: true
+    }
+  })
+
+  .state('app.episodes', {
+    url: "/episodes/:courseId",
+    views: {
+      'menuContent': {
+        templateUrl: "views/app/episodes.html",
+        controller: 'EpisodesCtrl'
+      }
+    },
+    data: {
+      authenticate: true
+    },
+    resolve: {
+      post_data: function(PostService, $ionicLoading, $stateParams) {
+        /*$ionicLoading.show({
+          template: 'Loading Episodes'
+        });*/
+        var courseId = $stateParams.courseId;
+        return PostService.getEpisodes(courseId);
+
+        $ionicLoading.hide();
+      }
+    }
+  })
+
+  .state('app.video', {
+    url: "/video/:videoId",
+    views: {
+      'menuContent': {
+        templateUrl: "views/app/video.html",
+        controller: 'VideoCtrl'
+      }
+    },
+    data: {
+      authenticate: true
+    },
+    resolve: {
+      post_data: function(PostService, $ionicLoading, $stateParams) {
+        $ionicLoading.show({
+          template: 'Loading Video'
+        });
+        var videoId = $stateParams.videoId;
+        return PostService.getVideo(videoId);
+
+        $ionicLoading.hide();
+      }
     }
   })
 
@@ -283,7 +331,7 @@ angular.module('skyacademyapp', [
 
 ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home/courses');
+  $urlRouterProvider.otherwise('/app/tabs/courses');
 })
 
 ;
