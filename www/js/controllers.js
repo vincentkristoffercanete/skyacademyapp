@@ -322,7 +322,7 @@ angular.module('skyacademyapp.controllers', [])
     AuthService.doLogin(user)
     .then(function(user){
       //success
-      $state.go('app.home.topics');
+      $state.go('app.home.courses');
 
       $ionicLoading.hide();
     },function(err){
@@ -387,18 +387,13 @@ angular.module('skyacademyapp.controllers', [])
   };
 })
 
-// HOME - GET RECENT POSTS
-.controller('topicsCtrl', function($scope, $rootScope, $state, $http, WORDPRESS_SITE_URL, $ionicLoading, PostService) {
-
-    $scope.posts = [];
-    $http.get(WORDPRESS_SITE_URL + 'wp-json/acf/v2/page/2291/units')
-    .success(function(data){
-      angular.forEach(data, function(child){
-        $scope.posts.push(child);
-      });
-    })
-    .error(function(response, status){
-      console.log("Error while received response. " + status + response);
+// GET COURSES
+.controller('coursesCtrl', function($scope, $rootScope, $state, $http, $ionicLoading, PostService) {
+    
+    var promise = PostService.getCourses();
+    promise.then(function(data){
+      $scope.courses = data;
+      console.log($scope.courses);
     });
 })
 

@@ -35,7 +35,7 @@ angular.module('skyacademyapp', [
         //update user avatar and go on
         AuthService.updateUserAvatar();
 
-        $state.go('app.home.topics');
+        $state.go('app.home.courses');
       }
       else
       {
@@ -135,11 +135,10 @@ angular.module('skyacademyapp', [
   })
 
   .state('app.home', {
-    url: '/tabs',
+    url: '/home',
     views: {
       'menuContent': {
         templateUrl: 'views/app/home.html',
-        controller: 'BookMarksCtrl'
       }
     },
     abstract:true,
@@ -148,12 +147,12 @@ angular.module('skyacademyapp', [
     },
   })
 
-  .state('app.home.topics', {
-    url: '/topics',
+  .state('app.home.courses', {
+    url: '/courses',
     views: {
       'tab1': {
-        templateUrl: 'views/app/topics.html',
-        controller: 'topicsCtrl'
+        templateUrl: 'views/app/courses.html',
+        controller: 'coursesCtrl'
       }
     },
     data: {
@@ -284,7 +283,7 @@ angular.module('skyacademyapp', [
 
 ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
+  $urlRouterProvider.otherwise('/app/home/courses');
 })
 
 ;

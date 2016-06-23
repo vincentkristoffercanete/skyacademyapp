@@ -1,7 +1,16 @@
 angular.module('skyacademyapp.services', [])
 
 // WP POSTS RELATED FUNCTIONS
-.service('PostService', function ($rootScope, $http, $q, WORDPRESS_API_URL, AuthService, BookMarkService){
+.service('PostService', function ($rootScope, $http, $q, WORDPRESS_API_URL, WORDPRESS_SITE_URL, AuthService, BookMarkService){
+
+  this.getCourses = function(){
+    var deferred = $q.defer();
+    $http.get(WORDPRESS_SITE_URL + 'wp-json/acf/v2/page/2291/units')
+    .then(function (data){
+      deferred.resolve(data);
+    })
+    return deferred.promise;
+  }
 
   this.getRecentPosts = function(page) {
     var deferred = $q.defer();
