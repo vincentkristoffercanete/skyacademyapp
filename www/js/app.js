@@ -35,7 +35,7 @@ angular.module('skyacademyapp', [
         //update user avatar and go on
         AuthService.updateUserAvatar();
 
-        $state.go('app.home');
+        $state.go('app.home.topics');
       }
       else
       {
@@ -135,11 +135,51 @@ angular.module('skyacademyapp', [
   })
 
   .state('app.home', {
-    url: "/home",
+    url: '/tabs',
     views: {
       'menuContent': {
-        templateUrl: "views/app/home.html",
-        controller: 'HomeCtrl'
+        templateUrl: 'views/app/home.html',
+        controller: 'BookMarksCtrl'
+      }
+    },
+    abstract:true,
+    data: {
+      authenticate: true
+    },
+  })
+
+  .state('app.home.topics', {
+    url: '/topics',
+    views: {
+      'tab1': {
+        templateUrl: 'views/app/topics.html',
+        controller: 'topicsCtrl'
+      }
+    },
+    data: {
+      authenticate: true
+    }
+  })
+
+  .state('app.home.trending', {
+    url: '/trending',
+    views: {
+      'tab2': {
+        templateUrl: 'views/app/trending.html',
+        controller: 'trendingCtrl'
+      }
+    },
+    data: {
+      authenticate: true
+    }
+  })
+
+  .state('app.home.user', {
+    url: '/user',
+    views: {
+      'tab3': {
+        templateUrl: 'views/app/user.html',
+        controller: 'userCtrl'
       }
     },
     data: {

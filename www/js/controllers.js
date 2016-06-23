@@ -9,6 +9,18 @@ angular.module('skyacademyapp.controllers', [])
   });
 })
 
+.controller('topicsCtrl', function($scope) {
+
+})
+   
+.controller('trendingCtrl', function($scope) {
+
+})
+   
+.controller('userCtrl', function($scope) {
+
+})
+
 // CATEGORIES MENU
 .controller('PushMenuCtrl', function($scope, Categories) {
 
@@ -314,7 +326,7 @@ angular.module('skyacademyapp.controllers', [])
     AuthService.doLogin(user)
     .then(function(user){
       //success
-      $state.go('app.home');
+      $state.go('app.home.topics');
 
       $ionicLoading.hide();
     },function(err){
@@ -379,59 +391,27 @@ angular.module('skyacademyapp.controllers', [])
   };
 })
 
+
+
+
+
 // HOME - GET RECENT POSTS
-.controller('HomeCtrl', function($scope, $rootScope, $state, $ionicLoading, PostService) {
-  $scope.posts = [];
-  $scope.page = 1;
-  $scope.totalPages = 1;
+.controller('HomeCtrl', function($scope, $rootScope, $state, $http, WORDPRESS_SITE_URL, $ionicLoading, PostService) {
 
-  $scope.doRefresh = function() {
-    $ionicLoading.show({
-      template: 'Loading posts...'
+    $scope.posts = [];
+    $http.get(WORDPRESS_SITE_URL + 'wp-json/acf/v2/page/2291/units')
+    .success(function(data){
+      angular.forEach(data, function(child){
+        console.log(child);
+        $scope.posts.push(child);
+      });
+    })
+    .error(function(response, status){
+      console.log("Error while received response. " + status + response);
     });
-
-    //Always bring me the latest posts => page=1
-    PostService.getRecentPosts(1)
-    .then(function(data){
-
-      $scope.totalPages = data.pages;
-      $scope.posts = PostService.shortenPosts(data.posts);
-
-      $ionicLoading.hide();
-      $scope.$broadcast('scroll.refreshComplete');
-    });
-  };
-
-  $scope.loadMoreData = function(){
-    $scope.page += 1;
-
-    PostService.getRecentPosts($scope.page)
-    .then(function(data){
-      //We will update this value in every request because new posts can be created
-      $scope.totalPages = data.pages;
-      var new_posts = PostService.shortenPosts(data.posts);
-      $scope.posts = $scope.posts.concat(new_posts);
-
-      $scope.$broadcast('scroll.infiniteScrollComplete');
-    });
-  };
-
-  $scope.moreDataCanBeLoaded = function(){
-    return $scope.totalPages > $scope.page;
-  };
-
-  $scope.sharePost = function(link){
-    PostService.sharePost(link);
-  };
-
-  $scope.bookmarkPost = function(post){
-    $ionicLoading.show({ template: 'Post Saved!', noBackdrop: true, duration: 1000 });
-    PostService.bookmarkPost(post);
-  };
-
-  $scope.doRefresh();
-
+    
 })
+
 
 
 // POST

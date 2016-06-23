@@ -204,6 +204,4 @@ angular.module('skyacademyapp.factories', [])
     }
   };
 })
-
-
 ;
