@@ -1,8 +1,8 @@
-<ion-view title="Episodes" id="page5" class="">
+<ion-view title="Episodes">
     <ion-content padding="true" class="has-header">
         <ion-list class="" ng-repeat="episode in episodes">
             <ion-item ui-sref="app.video({videoId : episode.id})">
-                {{episode.title.rendered}}</ion-item>
+                {{episode.title.rendered.replace("_"," ")}}</ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

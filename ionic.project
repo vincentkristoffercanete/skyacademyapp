@@ -1,6 +1,6 @@
 {
   "name": "SkyAcademy",
-  "app_id": "",
+  "app_id": "9bd99112",
   "gulpStartupTasks": [
     "sass",
     "templatecache",

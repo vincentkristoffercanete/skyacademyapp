@@ -1,4 +1,4 @@
-angular.module('skyacademyapp.directives', [])
+angular.module('your_app_name.directives', [])
 
 .directive('recursiveMenu', function($compile) {
 	return {

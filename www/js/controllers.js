@@ -1,4 +1,4 @@
-angular.module('skyacademyapp.controllers', [])
+angular.module('your_app_name.controllers', [])
 
 // APP - RIGHT MENU
 .controller('AppCtrl', function($scope, AuthService) {
@@ -392,20 +392,35 @@ angular.module('skyacademyapp.controllers', [])
 .controller('coursesCtrl', function($scope, $rootScope, $state, $http, $ionicLoading, PostService) {
     var promise = PostService.getCourses();
     promise.then(function(data){
-      $scope.courses = data.data.units;
+      $scope.courses = data.units;
     });
 })
 
 //EPISODES
 .controller('EpisodesCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate) {
-  $scope.episodes = post_data.data;
+  $scope.episodes = post_data;
   $ionicLoading.hide();
 })
 
 //VIDEO
-.controller('VideoCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate) {
-  $scope.video = post_data.data;
-  console.log($scope.video);
+.controller('VideoCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate, $sce) {
+  $scope.video = post_data;
+
+  var urlRegex = /(https?:\/\/[^\s"]+)/g;
+  var video_src = "";
+  $scope.video[0].content.rendered.replace(urlRegex, function(url) {
+      video_src = url.trim();
+  });
+  $scope.config = {
+      preload: "none",
+      sources: {
+          src: video_src
+      },
+      theme: {
+          url: "lib/videogular-themes-default/videogular.min.css"
+      }
+  };
+
   $ionicLoading.hide();
 })
 

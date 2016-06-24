@@ -1,4 +1,4 @@
-angular.module('skyacademyapp.config', [])
+angular.module('your_app_name.config', [])
 .constant('WORDPRESS_SITE_URL', 'http://103.250.214.4/~skyacade/')
 .constant('WORDPRESS_API_URL', 'http://103.250.214.4/~skyacade/api/')
 .constant('WORDPRESS_PUSH_URL', 'http://103.250.214.4/~skyacade/push/')
