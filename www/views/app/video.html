@@ -1,19 +1,32 @@
-<ion-view title="Video">
-    <ion-content class="has-header">
-        <div class="videogular-container">
-            <videogular vg-theme="config.theme.url">
-                <vg-media vg-src="config.sources.src"
-                          vg-tracks="config.tracks"
-                          vg-native-controls="true">
-                </vg-media>
-            </videogular>
-        </div>
-        <div class="padding">
-            <h4>{{video[0].title.rendered}}</h4>
+<ion-view title="" ng-controller="VideoCtrl as controller" 
+ hide-nav-bar="true">
 
+    <ion-content ng-repeat="videos in video | limitTo:1" class="overflow-scroll">
+
+        <videogular vg-player-ready="controller.onPlayerReady($API)" vg-plays-inline="controller.config.playsInline" vg-auto-play="controller.config.autoPlay" vg-native-fullscreen="false">
+            <vg-media vg-src="controller.config.sources">
+            </vg-media>
+            <vg-controls vg-autohide="controller.config.plugins.controls.autoHide" vg-autohide-time="controller.config.plugins.controls.autoHideTime">
+            <vg-play-pause-button></vg-play-pause-button>
+                <vg-time-display>{{ currentTime | date:'mm:ss':'+0000' }}</vg-time-display>
+                <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                </vg-scrub-bar>
+                <vg-time-display>{{ totalTime | date:'mm:ss':'+0000' }}</vg-time-display>
+                <vg-playback-button></vg-playback-button>
+                <vg-fullscreen-button ng-if="platform == 'android'"></vg-fullscreen-button>
+            </vg-controls>
+            <vg-buffering></vg-buffering>
+
+            <vg-overlay-play ng-if="platform == 'android'"></vg-overlay-play>
+
+        </videogular>
+        <div class="content-padding">
+            <h4 ng-bind-html="video[0].title.rendered | cleanText"></h4>
             <div class="description">
-            <div ng-bind-html="video[1].content.rendered | rawHtml"></div>
+                <div ng-bind-html="video[1].content.rendered"></div>
             </div>
         </div>
     </ion-content>
+
 </ion-view>

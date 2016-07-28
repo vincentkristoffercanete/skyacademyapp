@@ -1,4 +1,4 @@
-angular.module('your_app_name.controllers', [])
+angular.module('skyacademy.controllers', [])
 
 // APP - RIGHT MENU
 .controller('AppCtrl', function($scope, AuthService) {
@@ -8,142 +8,46 @@ angular.module('your_app_name.controllers', [])
     $scope.user = AuthService.getUser();
   });
 })
-   
-.controller('trendingCtrl', function($scope) {
-
-})
-   
-.controller('userCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService) {
-
-  // Triggered on a the logOut button click
-  $scope.showLogOutMenu = function() {
-
-    // Show the action sheet
-    var hideSheet = $ionicActionSheet.show({
-      //Here you can add some more buttons
-      // buttons: [
-      // { text: '<b>Share</b> This' },
-      // { text: 'Move' }
-      // ],
-      destructiveText: 'Logout',
-      titleText: 'Are you sure you want to logout?',
-      cancelText: 'Cancel',
-      cancel: function() {
-        // add cancel code..
-      },
-      buttonClicked: function(index) {
-        //Called when one of the non-destructive buttons is clicked,
-        //with the index of the button that was clicked and the button object.
-        //Return true to close the action sheet, or false to keep it opened.
-        return true;
-      },
-      destructiveButtonClicked: function(){
-        //Called when the destructive button is clicked.
-        //Return true to close the action sheet, or false to keep it opened.
-        AuthService.logOut();
-        $state.go('login');
-      }
-    });
-  };
-
-})
-
-// CATEGORIES MENU
-.controller('PushMenuCtrl', function($scope, Categories) {
-
-  var getItems = function(parents, categories){
-
-    if(parents.length > 0){
-
-      _.each(parents, function(parent){
-        parent.name = parent.title;
-        parent.link = parent.slug;
-
-        var items = _.filter(categories, function(category){ return category.parent===parent.id; });
-
-        if(items.length > 0){
-          parent.menu = {
-            title: parent.title,
-            id: parent.id,
-            items:items
-          };
-          getItems(parent.menu.items, categories);
-        }
-      });
-    }
-    return parents;
-  };
-
-  Categories.getCategories()
-  .then(function(data){
-    var sorted_categories = _.sortBy(data.categories, function(category){ return category.title; });
-    var parents = _.filter(sorted_categories, function(category){ return category.parent===0; });
-    var result = getItems(parents, sorted_categories);
-
-    $scope.menu = {
-      title: 'All Categories',
-      id: '0',
-      items: result
-    };
-  });
-})
-
-
-// BOOKMARKS
-.controller('BookMarksCtrl', function($scope, $rootScope, BookMarkService) {
-
-  $scope.bookmarks = BookMarkService.getBookmarks();
-
-  // When a new post is bookmarked, we should update bookmarks list
-  $rootScope.$on("new-bookmark", function(event, post_id){
-    $scope.bookmarks = BookMarkService.getBookmarks();
-  });
-
-  $scope.remove = function(bookmarkId) {
-    BookMarkService.remove(bookmarkId);
-    $scope.bookmarks = BookMarkService.getBookmarks();
-  };
-})
-
-
-// CONTACT
-.controller('ContactCtrl', function($scope) {
-
-  //map
-  $scope.position = {
-    lat: 43.07493,
-    lng: -89.381388
-  };
-
-  $scope.$on('mapInitialized', function(event, map) {
-    $scope.map = map;
-  });
-})
+  
+  
 
 // SETTINGS
-.controller('SettingCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService) {
+.controller('SettingCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService, PostService) {
   $scope.notifications = true;
   $scope.sendLocation = false;
 
-  $ionicModal.fromTemplateUrl('views/common/terms.html', {
+  $scope.user = AuthService.getUser();
+  var promise = PostService.getPmproAccount($scope.user.data.id);
+  promise.then(function(data){
+    $scope.pmpro = data;
+  });
+
+  $ionicModal.fromTemplateUrl('views/app/terms.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.terms_modal = modal;
   });
 
-  $ionicModal.fromTemplateUrl('views/common/faqs.html', {
+  $ionicModal.fromTemplateUrl('views/app/faqs.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.faqs_modal = modal;
   });
 
-  $ionicModal.fromTemplateUrl('views/common/credits.html', {
+  $ionicModal.fromTemplateUrl('views/app/policy.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.credits_modal = modal;
+    $scope.policy_modal = modal;
+  });
+
+  $ionicModal.fromTemplateUrl('views/app/account.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.account_modal = modal;
   });
 
   $scope.showTerms = function() {
@@ -154,145 +58,40 @@ angular.module('your_app_name.controllers', [])
     $scope.faqs_modal.show();
   };
 
-  $scope.showCredits = function() {
-    $scope.credits_modal.show();
+  $scope.showPolicy = function() {
+    $scope.policy_modal.show();
   };
 
-})
 
-//EMAIL SENDER
-.controller('EmailSenderCtrl', function($scope, $cordovaEmailComposer) {
-
-  $scope.sendFeedback = function(){
-    cordova.plugins.email.isAvailable(
-      function (isAvailable) {
-        // alert('Service is not available') unless isAvailable;
-        cordova.plugins.email.open({
-          to:      'john@doe.com',
-          cc:      'jane@doe.com',
-          subject: 'Feedback',
-          body:    'This app is awesome'
-        });
-      }
-    );
+  $scope.showAccount = function() {
+    $scope.account_modal.show();
   };
 
-  $scope.sendContactMail = function(){
-    //Plugin documentation here: http://ngcordova.com/docs/plugins/emailComposer/
 
-    $cordovaEmailComposer.isAvailable().then(function() {
-      // is available
-        $cordovaEmailComposer.open({
-          to: 'john@doe.com',
-          cc: 'sally@doe.com',
-          subject: 'Contact from ionWordpress',
-          body: 'How are you? Nice greetings from Uruguay'
-        })
-        .then(null, function () {
-          // user cancelled email
-        });
-    }, function () {
-      // not available
-    });
-  };
+  // Triggered on a the logOut button click
+  $scope.showLogOutMenu = function() {
 
-})
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show({
+        //Here you can add some more buttons
 
-
-// RATE THIS APP
-.controller('RateAppCtrl', function($scope) {
-
-  $scope.rateApp = function(){
-    if(ionic.Platform.isIOS()){
-      AppRate.preferences.storeAppURL.ios = '<my_app_id>';
-      AppRate.promptForRating(true);
-    }else if(ionic.Platform.isAndroid()){
-      AppRate.preferences.storeAppURL.android = 'market://details?id=<package_name>';
-      AppRate.promptForRating(true);
-    }
-  };
-})
-
-
-//ADMOB
-.controller('AdmobCtrl', function($scope, $ionicActionSheet, AdMob) {
-
-  $scope.manageAdMob = function() {
-
-    // Show the action sheet
-    var hideSheet = $ionicActionSheet.show({
-      //Here you can add some more buttons
-      buttons: [
-      { text: 'Show AdMob Banner' },
-      { text: 'Show AdMob Interstitial' }
-      ],
-      destructiveText: 'Remove Ads',
-      titleText: 'Choose the ad to show',
-      cancelText: 'Cancel',
-      cancel: function() {
-        // add cancel code..
-      },
-      destructiveButtonClicked: function() {
-        console.log("removing ads");
-        AdMob.removeAds();
-        return true;
-      },
-      buttonClicked: function(index, button) {
-        if(button.text == 'Show AdMob Banner')
-        {
-          console.log("show AdMob banner");
-          AdMob.showBanner();
+        titleText: 'Are you sure you want to logout?',
+        destructiveText: 'Logout',
+        cancelText: 'Cancel',
+        cancel: function() {
+          // add cancel code..
+        },
+        buttonClicked: function(index) {
+          return true;
+        },
+        destructiveButtonClicked: function(){
+          AuthService.logOut();
+          $state.go('login');
         }
-        if(button.text == 'Show AdMob Interstitial')
-        {
-          console.log("show AdMob interstitial");
-          AdMob.showInterstitial();
-        }
-        return true;
-      }
-    });
+      });
+    
   };
-})
 
-
-//IAD
-.controller('iAdCtrl', function($scope, $ionicActionSheet, iAd) {
-
-  $scope.manageiAd = function() {
-
-    // Show the action sheet
-    var hideSheet = $ionicActionSheet.show({
-      //Here you can add some more buttons
-      buttons: [
-      { text: 'Show iAd Banner' },
-      { text: 'Show iAd Interstitial' }
-      ],
-      destructiveText: 'Remove Ads',
-      titleText: 'Choose the ad to show - Interstitial only works in iPad',
-      cancelText: 'Cancel',
-      cancel: function() {
-        // add cancel code..
-      },
-      destructiveButtonClicked: function() {
-        console.log("removing ads");
-        iAd.removeAds();
-        return true;
-      },
-      buttonClicked: function(index, button) {
-        if(button.text == 'Show iAd Banner')
-        {
-          console.log("show iAd banner");
-          iAd.showBanner();
-        }
-        if(button.text == 'Show iAd Interstitial')
-        {
-          console.log("show iAd interstitial");
-          iAd.showInterstitial();
-        }
-        return true;
-      }
-    });
-  };
 })
 
 
@@ -312,7 +111,7 @@ angular.module('your_app_name.controllers', [])
   $scope.doLogin = function(){
 
     $ionicLoading.show({
-      template: 'Loging in...'
+      template: '<ion-spinner icon="ios-small"></ion-spinner> Logging in'
     });
 
     var user = {
@@ -323,7 +122,7 @@ angular.module('your_app_name.controllers', [])
     AuthService.doLogin(user)
     .then(function(user){
       //success
-      $state.go('app.home.courses');
+      $state.go('app.courses');
 
       $ionicLoading.hide();
     },function(err){
@@ -378,7 +177,7 @@ angular.module('your_app_name.controllers', [])
     AuthService.doRegister(user)
     .then(function(user){
       //success
-      $state.go('app.home');
+      $state.go('app.courses');
       $ionicLoading.hide();
     },function(err){
       //err
@@ -389,151 +188,94 @@ angular.module('your_app_name.controllers', [])
 })
 
 //COURSES
-.controller('coursesCtrl', function($scope, $rootScope, $state, $http, $ionicLoading, PostService) {
+.controller('CoursesCtrl', function($scope, $rootScope, $state, $http, $ionicLoading, PostService) {
+    $ionicLoading.show({
+      template: '<ion-spinner icon="ios-small"></ion-spinner> Loading Courses'
+    });
     var promise = PostService.getCourses();
     promise.then(function(data){
-      $scope.courses = data.units;
+      $scope.two_units = data.courses.two_unit;
+      $scope.bonus_units = data.courses.bonus;
+      $scope.three_units = data.courses.three_unit;
+      $ionicLoading.hide();
     });
 })
 
 //EPISODES
-.controller('EpisodesCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate) {
-  $scope.episodes = post_data;
-  $ionicLoading.hide();
+.controller('EpisodesCtrl', function($scope, $rootScope, $stateParams, $state, $http, $ionicLoading, PostService) {
+  $ionicLoading.show({
+    template: '<ion-spinner icon="ios-small"></ion-spinner> Loading Episodes'
+  });
+
+  var courseId = $stateParams.courseId;
+  var promise = PostService.getEpisodes(courseId);
+  promise.then(function(data){
+    $scope.episodes = data;
+    $ionicLoading.hide();
+  });
 })
 
 //VIDEO
-.controller('VideoCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate, $sce) {
-  $scope.video = post_data;
+.controller('VideoCtrl', function($scope, $stateParams, $ionicLoading, PostService, $sce, $ionicNavBarDelegate, $window, $document) {
+  $ionicLoading.show({
+    template: '<ion-spinner icon="ios-small"></ion-spinner> Loading Video'
+  }); 
 
-  var urlRegex = /(https?:\/\/[^\s"]+)/g;
-  var video_src = "";
-  $scope.video[0].content.rendered.replace(urlRegex, function(url) {
-      video_src = url.trim();
-  });
-  $scope.config = {
-      preload: "none",
-      sources: {
-          src: video_src
-      },
-      theme: {
-          url: "lib/videogular-themes-default/videogular.min.css"
-      }
-  };
+  var controller = this;
+  controller.API = null;
 
-  $ionicLoading.hide();
-})
-
-// POST
-.controller('PostCtrl', function($scope, post_data, $ionicLoading, PostService, AuthService, $ionicScrollDelegate) {
-  $scope.post = post_data.post;
-  $scope.comments = _.map(post_data.post.comments, function(comment){
-    if(comment.author){
-      PostService.getUserGravatar(comment.author.id)
-      .then(function(avatar){
-        comment.user_gravatar = avatar;
-      });
-      return comment;
+  var videoId = $stateParams.videoId;
+  var promise = PostService.getVideo(videoId);
+  promise.then(function(data){
+    $scope.video = data;
+    var urlRegex = /(https?:\/\/[^\s"]+)/g;
+    var video_src = "";
+    $scope.video[0].content.rendered.replace(urlRegex, function(url) {
+        video_src = url.trim();
+    });
+    $scope.platform = ionic.Platform.platform();
+    if($scope.platform == 'ios'){
+      $ionicNavBarDelegate.showBar(true);
     }else{
-      return comment;
+      $ionicNavBarDelegate.showBar(false);
     }
-  });
-  $ionicLoading.hide();
-
-  $scope.sharePost = function(link){
-    window.plugins.socialsharing.share('Check this post here: ', null, null, link);
-  };
-
-  $scope.addComment = function(){
-
-    $ionicLoading.show({
-      template: 'Submiting comment...'
+    controller.config = {
+        playsInline: true,
+        preload: "auto",
+        autoPlay: true,
+        sources: [
+            {src: $sce.trustAsResourceUrl(video_src), type: "video/mp4"}
+        ],
+        plugins: {
+          controls: {
+              autoHide: false,
+              autoHideTime: 3000
+          }
+        }
+    };
+    $ionicLoading.hide();
+    document.addEventListener("deviceready", function() {
+      screen.unlockOrientation();
+    });
+    
+    ShowHideControlBar();
+      
+    window.addEventListener("orientationchange", function(){
+      ShowHideControlBar();
     });
 
-    PostService.submitComment($scope.post.id, $scope.new_comment)
-    .then(function(data){
-      if(data.status=="ok"){
-        var user = AuthService.getUser();
-
-        var comment = {
-          author: {name: user.data.username},
-          content:$scope.new_comment,
-          date: Date.now(),
-          user_gravatar : user.avatar,
-          id: data.comment_id
-        };
-        $scope.comments.push(comment);
-        $scope.new_comment = "";
-        $scope.new_comment_id = data.comment_id;
-        $ionicLoading.hide();
-        // Scroll to new post
-        $ionicScrollDelegate.scrollBottom(true);
+    function ShowHideControlBar(){
+        if(screen.orientation.type == "landscape-primary"){
+          controller.config.plugins.controls.autoHide = true;
+        }
+        if(screen.orientation.type == "portrait-primary"){
+          controller.config.plugins.controls.autoHide = false;
+        }
       }
-    });
-  };
+
+  });
+
 })
 
-
-// CATEGORY
-.controller('PostCategoryCtrl', function($scope, $rootScope, $state, $ionicLoading, $stateParams, PostService) {
-
-  $scope.category = {};
-  $scope.category.id = $stateParams.categoryId;
-  $scope.category.title = $stateParams.categoryTitle;
-
-  $scope.posts = [];
-  $scope.page = 1;
-  $scope.totalPages = 1;
-
-  $scope.doRefresh = function() {
-    $ionicLoading.show({
-      template: 'Loading posts...'
-    });
-
-    PostService.getPostsFromCategory($scope.category.id, 1)
-    .then(function(data){
-      $scope.totalPages = data.pages;
-      $scope.posts = PostService.shortenPosts(data.posts);
-
-      $ionicLoading.hide();
-      $scope.$broadcast('scroll.refreshComplete');
-    });
-  };
-
-  $scope.loadMoreData = function(){
-    $scope.page += 1;
-
-    PostService.getRecentPosts($scope.category.id, $scope.page)
-    .then(function(data){
-      //We will update this value in every request because new posts can be created
-      $scope.totalPages = data.pages;
-      var new_posts = PostService.shortenPosts(data.posts);
-      $scope.posts = $scope.posts.concat(new_posts);
-
-      $scope.$broadcast('scroll.infiniteScrollComplete');
-    });
-  };
-
-  $scope.moreDataCanBeLoaded = function(){
-    return $scope.totalPages > $scope.page;
-  };
-
-  $scope.sharePost = function(link){
-    PostService.sharePost(link);
-  };
-
-  $scope.bookmarkPost = function(post){
-    $ionicLoading.show({ template: 'Post Saved!', noBackdrop: true, duration: 1000 });
-    PostService.bookmarkPost(post);
-  };
-
-  $scope.doRefresh();
-})
-
-
-// WP PAGE
-.controller('PageCtrl', function($scope, page_data) {
-  $scope.page = page_data.page;
-})
 
 ;

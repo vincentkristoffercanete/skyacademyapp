@@ -1,8 +1,29 @@
-<ion-view title="Courses" id="page4" class="">
-    <ion-content padding="true" class="has-header">
-        <ion-list ng-repeat="course in courses">
-            <ion-item ui-sref="app.episodes({courseId : course.ID})" >
-                {{course.post_title}}</ion-item>
-        </ion-list>
+<ion-view title="Courses">
+    <ion-content class="has-header" ion-sticky>
+        <div class="list" >
+        	<div class="item item-divider">19 HSC 2 UNIT MATH</div>
+		    <a ng-repeat="two_unit in two_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : two_unit.ID})">
+		      <img ng-src="{{two_unit.featured_image}}">
+		      <h2 ng-bind-html="two_unit.post_title"></h2>
+		      <p>{{two_unit.post_content | htmlToPlaintext | limitTo: 100}}{{two_unit.post_content.length > 100 ? '...' : ''}}</p>
+		     <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+
+		    <div class="item item-divider">BONUS</div>
+		    <a ng-repeat="bonus_unit in bonus_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : bonus_unit.ID})">
+		      <img ng-src="{{bonus_unit.featured_image}}">
+		      <h2 ng-bind-html="bonus_unit.post_title"></h2>
+		      <p>{{bonus_unit.post_content | htmlToPlaintext | limitTo: 100}}{{bonus_unit.post_content.length > 100 ? '...' : ''}}</p>
+		     <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+
+		    <div class="item item-divider">HSC EXTENSION 1 MATH</div>
+		    <a ng-repeat="three_unit in three_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : three_unit.ID})">
+		      <img ng-src="{{three_unit.featured_image}}">
+		      <h2 ng-bind-html="three_unit.post_title"></h2>
+		      <p>{{three_unit.post_content | htmlToPlaintext | limitTo: 100}}{{three_unit.post_content.length > 100 ? '...' : ''}}</p>
+		     <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		</div>
     </ion-content>
 </ion-view>

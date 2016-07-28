@@ -1,1 +1,62 @@
 // Override Ionic styles
+.bar.app-top-bar{
+	background-image: none;
+}
+.item p{
+	white-space: normal;
+}
+.platform-android .action-sheet .action-sheet-title{
+	border-bottom: 1px solid #888888;
+	font-size: 16px;
+}
+.platform-android .action-sheet .button,
+.platform-android .action-sheet .action-sheet-title{
+	text-align: center;
+}
+.platform-android .action-sheet .button{
+	color: #ff3b30;
+	font-size: 18px;
+}
+.main-menu .heading-item .heading-bg{
+	background: none !important;
+}
+.platform-android .bar .title{
+	font-size: 19px;
+    line-height: 44px;
+    text-align: center;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: -1;
+}
+videogular vg-time-display, [videogular] vg-time-display{
+	font-size: 14px !important;
+}
+videogular vg-buffering .bufferingContainer, [videogular] vg-buffering .bufferingContainer{
+	margin-top: -25px !important;
+}
+.spinner svg {
+  stroke: #fff;
+  fill: #fff;
+}
+.loading-container .loading *{
+	vertical-align: middle;
+	line-height: 28px;
+}
+.content-padding{
+	padding: 10px 20px;
+}
+.item-icon-right{
+	padding-right: 28px;
+}
+.item-icon-right .icon{
+	right: 0;
+	font-size: 22px;
+	color: #333;
+}
+.assertive, a.assertive{
+	color: #222;
+}
+.episodes .item h2{
+	white-space: normal;
+	line-height: 1.5;
+}

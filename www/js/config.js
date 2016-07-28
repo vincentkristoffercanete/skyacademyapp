@@ -1,6 +1,6 @@
-angular.module('your_app_name.config', [])
-.constant('WORDPRESS_SITE_URL', 'http://103.250.214.4/~skyacade/')
-.constant('WORDPRESS_API_URL', 'http://103.250.214.4/~skyacade/api/')
-.constant('WORDPRESS_PUSH_URL', 'http://103.250.214.4/~skyacade/push/')
+angular.module('skyacademy.config', [])
+.constant('WORDPRESS_SITE_URL', 'https://www.skyacademy.com.au/')
+.constant('WORDPRESS_API_URL', 'https://www.skyacademy.com.au/api/')
+.constant('WORDPRESS_PUSH_URL', 'https://www.skyacademy.com.au/push/')
 .constant('GCM_SENDER_ID', '574597432927')
 ;

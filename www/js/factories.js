@@ -1,4 +1,4 @@
-angular.module('your_app_name.factories', [])
+angular.module('skyacademy.factories', [])
 
 // Factory for wordpress-pushserver http://codecanyon.net/item/send-mobile-push-notification-messages/6548533, if you are using other push notifications server you need to change this
 .factory('WpPushServer', function ($http, WORDPRESS_PUSH_URL){

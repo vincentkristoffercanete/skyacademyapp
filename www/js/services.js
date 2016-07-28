@@ -1,11 +1,11 @@
-angular.module('your_app_name.services', [])
+angular.module('skyacademy.services', [])
 
 // WP POSTS RELATED FUNCTIONS
 .service('PostService', function ($rootScope, $http, $q, WORDPRESS_API_URL, WORDPRESS_SITE_URL, AuthService, BookMarkService){
 
   this.getCourses = function(){
     var deferred = $q.defer();
-    $http.get(WORDPRESS_SITE_URL + 'wp-json/acf/v2/page/2291/units')
+    $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/pages/2291')
     .success(function(data) {
       deferred.resolve(data);
     })
@@ -30,6 +30,18 @@ angular.module('your_app_name.services', [])
   this.getVideo = function(videoId){
     var deferred = $q.defer();
     $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/module/?filter[post_parent]='+ videoId +'&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish')
+    .success(function(data) {
+      deferred.resolve(data);
+    })
+    .error(function(data) {
+      deferred.reject(data);
+    });
+    return deferred.promise;
+  };
+
+  this.getPmproAccount = function(userId){
+    var deferred = $q.defer();
+    $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/users/'+userId+'/pmpro_membership_level')
     .success(function(data) {
       deferred.resolve(data);
     })

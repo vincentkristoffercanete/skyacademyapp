@@ -1,0 +1,38 @@
+<ion-modal-view class="settings-view">
+	<ion-header-bar class="bar bar-header bar-positive">
+	  <h1 class="title">Account</h1>
+	  <button class="button button-clear button-primary" ng-click="account_modal.hide()"><span class="icon ion-android-close light"></span></button>
+	</ion-header-bar>
+	<ion-content>
+		<div class="list">
+			<div class="item item-divider">
+				MY MEMBERSHIP
+			</div>
+			<div class="item">
+				Level: <strong>{{pmpro.name}}</strong>
+			</div>
+			<div class="item">
+				Billing: 
+				<strong>{{pmpro.billing_limit}} AUD</strong>
+			</div>
+			<div class="item">
+				Expiration: 
+				<strong ng-if="pmpro.enddate == 0">NO</strong>
+				<strong ng-if="pmpro.enddate != 0">{{pmpro.enddate}}</strong>
+			</div>
+
+			<div class="item item-divider">
+				MY ACCOUNT
+			</div>
+			<div class="item">
+				Name: <strong>{{user.data.displayname}}</strong>
+			</div>
+			<div class="item">
+				Username: <strong>{{user.data.username}}</strong>
+			</div>
+			<div class="item">
+				Email: <strong>{{user.data.email}}</strong>
+			</div>
+		</div>
+	</ion-content>
+</ion-modal-view>

@@ -18,11 +18,7 @@
 @import "scss/common/common.variables";
 @import "scss/auth/auth.variables";
 @import "scss/mainmenu/main-menu.variables";
-@import "scss/bookmarks/bookmarks.variables";
-@import "scss/wordpress/wordpress.variables";
-@import "scss/multimenu/multi-level-push-menu.variables";
 @import "scss/settings/settings.variables";
-@import "scss/contact/contact.variables";
 
 // Include custom styles
 @import "scss/common/common.styles";
@@ -34,13 +30,4 @@
 @import "scss/auth/forgot-password.styles";
 
 @import "scss/mainmenu/main-menu.styles";
-@import "scss/multimenu/wp-search.styles";
-@import "scss/multimenu/multi-level-push-menu.styles";
-
-@import "scss/wordpress/wordpress.styles";
-@import "scss/wordpress/post.styles";
-@import "scss/wordpress/page.styles";
-
-@import "scss/bookmarks/bookmarks.styles";
 @import "scss/settings/settings.styles";
-@import "scss/contact/contact.styles";

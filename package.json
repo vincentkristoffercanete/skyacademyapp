@@ -1,6 +1,6 @@
 {
   "name": "SkyAcademy",
-  "version": "1.2.0",
+  "version": "0.0.1",
   "description": "SkyAcademy App",
   "dependencies": {
     "async": "^1.4.0",
@@ -33,19 +33,14 @@
   },
   "cordovaPlugins": [
     "com.ionic.keyboard",
-    "org.pushandplay.cordova.apprate",
-    "https://github.com/katzer/cordova-plugin-email-composer.git",
     "cordova-plugin-extension",
     "cordova-plugin-console@^1.0.1",
     "cordova-plugin-device@^1.0.1",
     "cordova-plugin-dialogs@^1.1.1",
     "cordova-plugin-globalization@^1.0.1",
     "cordova-plugin-whitelist@1.0.0",
-    "cordova-plugin-admobpro",
-    "com.rjfun.cordova.iad",
     "cordova-plugin-inappbrowser",
-    "nl.x-services.plugins.socialsharing",
-    "cordova-plugin-splashscreen"
+    "cordova-plugin-crosswalk-webview"
   ],
   "cordovaPlatforms": [
     "ios",

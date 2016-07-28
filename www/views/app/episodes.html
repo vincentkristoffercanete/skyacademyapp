@@ -1,8 +1,11 @@
-<ion-view title="Episodes">
-    <ion-content padding="true" class="has-header">
-        <ion-list class="" ng-repeat="episode in episodes">
-            <ion-item ui-sref="app.video({videoId : episode.id})">
-                {{episode.title.rendered.replace("_"," ")}}</ion-item>
-        </ion-list>
+<ion-view title="Episodes" class="episodes">
+    <ion-content class="has-header">
+        <div class="list">
+		    <a ng-repeat="episode in episodes" class="item item-icon-left item-icon-right" ui-sref="app.video({videoId : episode.id})">
+		      <i class="icon ion-ios-film"></i>
+		      <h2 ng-bind-html="episode.title.rendered | cleanText"></h2>
+		      <i class="icon ion-ios-arrow-right"></i>
+		    </a>
+		</div>
     </ion-content>
 </ion-view>

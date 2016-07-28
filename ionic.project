@@ -1,14 +1,12 @@
 {
-  "name": "SkyAcademy",
-  "app_id": "9bd99112",
+  "name": "skyacademyapp",
+  "app_id": "44e3bd13",
   "gulpStartupTasks": [
     "sass",
-    "templatecache",
     "watch"
   ],
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*"
-  ],
-  "documentRoot": "www"
+  ]
 }
