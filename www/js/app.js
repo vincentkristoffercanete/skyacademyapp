@@ -9,7 +9,6 @@ angular.module('underscore', [])
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('skyacademy', [
-  'ionic',
   'skyacademy.directives',
   'skyacademy.controllers',
   'skyacademy.views',
@@ -28,7 +27,7 @@ angular.module('skyacademy', [
 ])
 
 .run(function($ionicPlatform, AuthService, $rootScope, $state, PushNotificationsService) {
-
+  
   $ionicPlatform.on("deviceready", function(){
 
     AuthService.userIsLoggedIn().then(function(response)
@@ -175,22 +174,6 @@ angular.module('skyacademy', [
       authenticate: true
     }
   })
-
-
-  .state('app.settings', {
-    url: "/settings",
-    views: {
-      'menuContent': {
-        templateUrl: "views/app/settings.html",
-        controller: 'SettingCtrl'
-      }
-    },
-    data: {
-      authenticate: true
-    }
-  })
-
-
 
 
 ;

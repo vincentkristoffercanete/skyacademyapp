@@ -12,7 +12,7 @@
 
       .slider-slide
       {
-        width: calc(100vw - 10px) !important;
+        display: table;
       }
     }
 
@@ -20,25 +20,27 @@
     {
       height: 100%;
       text-align:center;
-      padding-top: 40px;
+      vertical-align: middle;
+      display: table-cell;
 
       .slide-image
       {
         width:90%;
-        margin: 40px 0px 50px;
+        margin: 0px 0px 20px;
       }
     }
 
     .slide-h
     {
       color: $walkthrough-color;
-      font-weight: 400;
+      margin-bottom: 25px;
+      font-size: 20px;
     }
 
     .slide-p
     {
       color: rgba($walkthrough-color, .7);
-      font-size: 16px;
+      font-size: 17px;
     }
 
     .slider-pager

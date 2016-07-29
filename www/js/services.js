@@ -15,6 +15,18 @@ angular.module('skyacademy.services', [])
     return deferred.promise;
   };
 
+  this.getCourseInfo = function(courseId){
+    var deferred = $q.defer();
+    $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/course/'+courseId)
+    .success(function(data) {
+      deferred.resolve(data);
+    })
+    .error(function(data) {
+      deferred.reject(data);
+    });
+    return deferred.promise;
+  };
+
   this.getEpisodes = function(courseId){
     var deferred = $q.defer();
     $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/unit/?filter[post_parent]='+ courseId +'&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish')
@@ -30,6 +42,18 @@ angular.module('skyacademy.services', [])
   this.getVideo = function(videoId){
     var deferred = $q.defer();
     $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/module/?filter[post_parent]='+ videoId +'&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish')
+    .success(function(data) {
+      deferred.resolve(data);
+    })
+    .error(function(data) {
+      deferred.reject(data);
+    });
+    return deferred.promise;
+  };
+
+  this.getPageContent = function(pageID){
+    var deferred = $q.defer();
+    $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/pages/'+pageID)
     .success(function(data) {
       deferred.resolve(data);
     })

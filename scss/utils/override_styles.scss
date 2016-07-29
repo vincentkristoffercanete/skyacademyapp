@@ -2,6 +2,9 @@
 .bar.app-top-bar{
 	background-image: none;
 }
+.bar .buttons-right .button{
+	display: block !important;
+}
 .item p{
 	white-space: normal;
 }
@@ -19,14 +22,6 @@
 }
 .main-menu .heading-item .heading-bg{
 	background: none !important;
-}
-.platform-android .bar .title{
-	font-size: 19px;
-    line-height: 44px;
-    text-align: center;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: -1;
 }
 videogular vg-time-display, [videogular] vg-time-display{
 	font-size: 14px !important;
@@ -51,12 +46,25 @@ videogular vg-buffering .bufferingContainer, [videogular] vg-buffering .bufferin
 .item-icon-right .icon{
 	right: 0;
 	font-size: 22px;
-	color: #333;
+	color: #ccc;
 }
 .assertive, a.assertive{
 	color: #222;
 }
 .episodes .item h2{
 	white-space: normal;
-	line-height: 1.5;
+	line-height: 1.4;
+	font-size: 14px;
+}
+.episodes .item-divider{
+	padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 16px;
+    min-height: 0px;
+    color: #285f8f;
+    height: 40px;
+    line-height: 40px;
+}
+.terms-view ul{
+	margin-bottom: 20px;
 }

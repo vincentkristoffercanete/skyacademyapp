@@ -1,8 +1,8 @@
 <ion-view title="Episodes" class="episodes">
-    <ion-content class="has-header">
+    <ion-content class="has-header" ion-sticky>
         <div class="list">
-		    <a ng-repeat="episode in episodes" class="item item-icon-left item-icon-right" ui-sref="app.video({videoId : episode.id})">
-		      <i class="icon ion-ios-film"></i>
+        	<div class="item item-divider">{{course.title.rendered}}</div>
+		    <a ng-repeat="episode in episodes" class="item item-icon-right" ui-sref="app.video({videoId : episode.id})">
 		      <h2 ng-bind-html="episode.title.rendered | cleanText"></h2>
 		      <i class="icon ion-ios-arrow-right"></i>
 		    </a>

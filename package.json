@@ -40,7 +40,15 @@
     "cordova-plugin-globalization@^1.0.1",
     "cordova-plugin-whitelist@1.0.0",
     "cordova-plugin-inappbrowser",
-    "cordova-plugin-crosswalk-webview"
+    "cordova-plugin-crosswalk-webview",
+    {
+      "variables": {
+        "SENDER_ID": "356515480526"
+      },
+      "locator": "phonegap-plugin-push",
+      "id": "phonegap-plugin-push"
+    },
+    "cordova-plugin-statusbar"
   ],
   "cordovaPlatforms": [
     "ios",

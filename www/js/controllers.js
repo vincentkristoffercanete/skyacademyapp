@@ -1,25 +1,20 @@
 angular.module('skyacademy.controllers', [])
 
-// APP - RIGHT MENU
-.controller('AppCtrl', function($scope, AuthService) {
-
-  $scope.$on('$ionicView.enter', function(){
-    // Refresh user data & avatar
-    $scope.user = AuthService.getUser();
-  });
-})
-  
-  
-
-// SETTINGS
-.controller('SettingCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService, PostService) {
-  $scope.notifications = true;
-  $scope.sendLocation = false;
+// APP
+.controller('AppCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService, PostService) {
 
   $scope.user = AuthService.getUser();
+
   var promise = PostService.getPmproAccount($scope.user.data.id);
   promise.then(function(data){
     $scope.pmpro = data;
+  });
+
+  $ionicModal.fromTemplateUrl('views/app/settings.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.settings_modal = modal;
   });
 
   $ionicModal.fromTemplateUrl('views/app/terms.html', {
@@ -27,13 +22,12 @@ angular.module('skyacademy.controllers', [])
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.terms_modal = modal;
-  });
 
-  $ionicModal.fromTemplateUrl('views/app/faqs.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.faqs_modal = modal;
+    var promise = PostService.getPageContent(3549);
+    promise.then(function(data){
+      $scope.terms = data;
+    });
+
   });
 
   $ionicModal.fromTemplateUrl('views/app/policy.html', {
@@ -41,6 +35,12 @@ angular.module('skyacademy.controllers', [])
     animation: 'slide-in-up'
   }).then(function(modal) {
     $scope.policy_modal = modal;
+
+    var promise = PostService.getPageContent(3556);
+    promise.then(function(data){
+      $scope.policy = data;
+    });
+
   });
 
   $ionicModal.fromTemplateUrl('views/app/account.html', {
@@ -50,12 +50,12 @@ angular.module('skyacademy.controllers', [])
     $scope.account_modal = modal;
   });
 
-  $scope.showTerms = function() {
-    $scope.terms_modal.show();
+  $scope.showSettings = function() {
+    $scope.settings_modal.show();
   };
 
-  $scope.showFAQS = function() {
-    $scope.faqs_modal.show();
+  $scope.showTerms = function() {
+    $scope.terms_modal.show();
   };
 
   $scope.showPolicy = function() {
@@ -86,6 +86,7 @@ angular.module('skyacademy.controllers', [])
         },
         destructiveButtonClicked: function(){
           AuthService.logOut();
+          $scope.settings_modal.hide();
           $state.go('login');
         }
       });
@@ -208,11 +209,18 @@ angular.module('skyacademy.controllers', [])
   });
 
   var courseId = $stateParams.courseId;
+  var promise = PostService.getCourseInfo(courseId);
+  promise.then(function(data){
+    $scope.course = data;
+  });
+
   var promise = PostService.getEpisodes(courseId);
   promise.then(function(data){
     $scope.episodes = data;
     $ionicLoading.hide();
   });
+
+
 })
 
 //VIDEO
