@@ -1,5 +1,4 @@
 // Ionic Starter App
-
 angular.module('underscore', [])
 .factory('_', function() {
   return window._; // assumes underscore has already been loaded on the page
@@ -30,17 +29,11 @@ angular.module('skyacademy', [
   
   $ionicPlatform.on("deviceready", function(){
 
-    AuthService.userIsLoggedIn().then(function(response)
-    {
-      if(response === true)
-      {
-        //update user avatar and go on
-        AuthService.updateUserAvatar();
-
+    AuthService.userIsLoggedIn().then(function(response){
+      if(response === true){
         $state.go('app.courses');
       }
-      else
-      {
+      else{
         $state.go('walkthrough');
       }
     });
@@ -51,37 +44,26 @@ angular.module('skyacademy', [
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-
-    PushNotificationsService.register();
 
   });
 
   $ionicPlatform.on("resume", function(){
-    AuthService.userIsLoggedIn().then(function(response)
-    {
-      if(response === false)
-      {
+    AuthService.userIsLoggedIn().then(function(response){
+      if(response === false){
         $state.go('walkthrough');
       }else{
-        //update user avatar and go on
         AuthService.updateUserAvatar();
       }
     });
-
-    PushNotificationsService.register();
   });
 
   // UI Router Authentication Check
   $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-    if (toState.data.authenticate)
-    {
-      AuthService.userIsLoggedIn().then(function(response)
-      {
-        if(response === false)
-        {
+    if (toState.data.authenticate){
+      AuthService.userIsLoggedIn().then(function(response){
+        if(response === false){
           event.preventDefault();
           $state.go('walkthrough');
         }
