@@ -199,6 +199,7 @@ angular.module('skyacademy.controllers', [])
       $scope.bonus_units = data.courses.bonus;
       $scope.three_units = data.courses.three_unit;
       $ionicLoading.hide();
+      $scope.isloaded = true;
     });
 })
 

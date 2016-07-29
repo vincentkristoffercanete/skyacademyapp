@@ -18,33 +18,10 @@
     color: lighten($content-color, 30);
     font-weight: 400;
   }
-}
 
-.terms-of-service
-{
-  padding: 20px;
-  text-align: justify;
-
-  .title{
-    margin-top: 30px;
-  }
-}
-
-.credits
-{
-  padding: 20px;
-  text-align: justify;
-}
-
-.faqs
-{
-  padding: 20px;
-  text-align: justify;
-
-  .faq-item
-  {
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-    border-bottom: 1px solid lighten($content-color, 60);
+  .item-note{
+    float: right;
+    color: #888;
+    font-size: 15px;
   }
 }

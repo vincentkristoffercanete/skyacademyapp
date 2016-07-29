@@ -6,32 +6,35 @@
 	<ion-content>
 		<div class="list">
 			<div class="item item-divider">
-				MY MEMBERSHIP
-			</div>
-			<div class="item">
-				Level: <strong>{{pmpro.name}}</strong>
-			</div>
-			<div class="item">
-				Billing: 
-				<strong>{{pmpro.billing_limit}} AUD</strong>
-			</div>
-			<div class="item">
-				Expiration: 
-				<strong ng-if="pmpro.enddate == 0">NO</strong>
-				<strong ng-if="pmpro.enddate != 0">{{pmpro.enddate}}</strong>
-			</div>
-
-			<div class="item item-divider">
 				MY ACCOUNT
 			</div>
 			<div class="item">
-				Name: <strong>{{user.data.displayname}}</strong>
+				First Name: <span class="item-note">{{user.data.firstname}}<span>
 			</div>
 			<div class="item">
-				Username: <strong>{{user.data.username}}</strong>
+				Last Name: <span class="item-note">{{user.data.lastname}}<span>
 			</div>
 			<div class="item">
-				Email: <strong>{{user.data.email}}</strong>
+				Username: <span class="item-note">{{user.data.username}}<span>
+
+			</div>
+			<div class="item">
+				Email: <span class="item-note">{{user.data.email}}<span>
+			</div>
+
+			<div class="item item-divider">
+				MY MEMBERSHIP
+			</div>
+			<div class="item">
+				Account Type: <span class="item-note">{{pmpro.name}}<span>
+			</div>
+			<div class="item">
+				Billing: <span class="item-note">{{pmpro.billing_limit}} AUD<span>
+			</div>
+			<div class="item">
+				Expiration: 
+				<span class="item-note" ng-if="pmpro.enddate == 0">NO<span>
+				<span class="item-note" ng-if="pmpro.enddate != 0">{{pmpro.enddate}}<span>
 			</div>
 		</div>
 	</ion-content>
