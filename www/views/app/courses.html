@@ -5,7 +5,7 @@
 		    <a ng-repeat="two_unit in two_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : two_unit.ID})">
 		      <img ng-src="{{two_unit.featured_image}}">
 		      <h2 ng-bind-html="two_unit.post_title"></h2>
-		      <p>{{two_unit.post_content | htmlToPlaintext | limitTo: 100}}{{two_unit.post_content.length > 100 ? '...' : ''}}</p>
+		      <p>{{two_unit.post_content | htmlToPlaintext | limitTo: 150}}{{two_unit.post_content.length > 150 ? '...' : ''}}</p>
 		     <i class="icon ion-ios-arrow-right"></i>
 		    </a>
 
@@ -13,7 +13,7 @@
 		    <a ng-repeat="bonus_unit in bonus_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : bonus_unit.ID})">
 		      <img ng-src="{{bonus_unit.featured_image}}">
 		      <h2 ng-bind-html="bonus_unit.post_title"></h2>
-		      <p>{{bonus_unit.post_content | htmlToPlaintext | limitTo: 100}}{{bonus_unit.post_content.length > 100 ? '...' : ''}}</p>
+		      <p>{{bonus_unit.post_content | htmlToPlaintext | limitTo: 150}}{{bonus_unit.post_content.length > 150 ? '...' : ''}}</p>
 		     <i class="icon ion-ios-arrow-right"></i>
 		    </a>
 
@@ -21,7 +21,7 @@
 		    <a ng-repeat="three_unit in three_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : three_unit.ID})">
 		      <img ng-src="{{three_unit.featured_image}}">
 		      <h2 ng-bind-html="three_unit.post_title"></h2>
-		      <p>{{three_unit.post_content | htmlToPlaintext | limitTo: 100}}{{three_unit.post_content.length > 100 ? '...' : ''}}</p>
+		      <p>{{three_unit.post_content | htmlToPlaintext | limitTo: 150}}{{three_unit.post_content.length > 150 ? '...' : ''}}</p>
 		     <i class="icon ion-ios-arrow-right"></i>
 		    </a>
 		</div>
