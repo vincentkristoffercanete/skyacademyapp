@@ -32,26 +32,44 @@
     "mv": "^2.1.1"
   },
   "cordovaPlugins": [
-    "com.ionic.keyboard",
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "cordova-plugin-dialogs",
+    "cordova-plugin-globalization",
     "cordova-plugin-extension",
-    "cordova-plugin-console@^1.0.1",
-    "cordova-plugin-device@^1.0.1",
-    "cordova-plugin-dialogs@^1.1.1",
-    "cordova-plugin-globalization@^1.0.1",
-    "cordova-plugin-whitelist@1.0.0",
     "cordova-plugin-inappbrowser",
+    "cordova-plugin-whitelist",
+    {
+      "locator": "https://github.com/driftyco/ionic-plugins-keyboard.git",
+      "id": "ionic-plugin-keyboard"
+    },
+    "cordova-plugin-fullscreen",
+    "cordova-plugin-screen-orientation",
+    "cordova-plugin-splashscreen",
     "cordova-plugin-crosswalk-webview",
     {
+      "id": "phonegap-plugin-push",
+      "locator": "phonegap-plugin-push",
       "variables": {
         "SENDER_ID": "356515480526"
-      },
-      "locator": "phonegap-plugin-push",
-      "id": "phonegap-plugin-push"
+      }
     },
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "cordova-plugin-apprate@1.1.12",
+    "cordova-plugin-apprate@1.1.8"
   ],
   "cordovaPlatforms": [
     "ios",
-    "android"
+    "android",
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    },
+    {
+      "platform": "ios",
+      "version": "",
+      "locator": "ios"
+    }
   ]
 }

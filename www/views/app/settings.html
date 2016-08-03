@@ -9,10 +9,11 @@
       <ion-item class="item" href="" ng-click="showAccount()">Account & Membership</ion-item>
 
       <div class="item item-divider">LEGAL</div>
-      <ion-item class="item" href="" ng-click="showTerms()">Terms of Service</ion-item>
-      <ion-item class="item" href="" ng-click="showPolicy()">Privacy Policy</ion-item>
+      <ion-item class="item" href="" ng-controller="TermsCtrl" ng-click="showTerms()">Terms of Service</ion-item>
+      <ion-item class="item" href="" ng-controller="PolicyCtrl" ng-click="showPolicy()">Privacy Policy</ion-item>
 
       <div class="item item-divider">ACTION</div>
+      <!-- <ion-item class="item" href="" ng-controller="RateAppCtrl" ng-click="rateApp()">Rate this app</ion-item> -->
       <ion-item class="item" href="" ng-click="showLogOutMenu()">Logout</ion-item>
     </ion-list>
   </ion-content>

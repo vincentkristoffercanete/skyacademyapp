@@ -5,11 +5,6 @@ angular.module('skyacademy.controllers', [])
 
   $scope.user = AuthService.getUser();
 
-  var promise = PostService.getPmproAccount($scope.user.data.id);
-  promise.then(function(data){
-    $scope.pmpro = data;
-  });
-
   $ionicModal.fromTemplateUrl('views/app/settings.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -17,54 +12,25 @@ angular.module('skyacademy.controllers', [])
     $scope.settings_modal = modal;
   });
 
-  $ionicModal.fromTemplateUrl('views/app/terms.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.terms_modal = modal;
-
-    var promise = PostService.getPageContent(3549);
-    promise.then(function(data){
-      $scope.terms = data;
-    });
-
-  });
-
-  $ionicModal.fromTemplateUrl('views/app/policy.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.policy_modal = modal;
-
-    var promise = PostService.getPageContent(3556);
-    promise.then(function(data){
-      $scope.policy = data;
-    });
-
-  });
-
-  $ionicModal.fromTemplateUrl('views/app/account.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.account_modal = modal;
-  });
 
   $scope.showSettings = function() {
     $scope.settings_modal.show();
   };
 
-  $scope.showTerms = function() {
-    $scope.terms_modal.show();
-  };
-
-  $scope.showPolicy = function() {
-    $scope.policy_modal.show();
-  };
-
-
   $scope.showAccount = function() {
-    $scope.account_modal.show();
+    $ionicModal.fromTemplateUrl('views/app/account.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.account_modal = modal;
+
+      var promise = PostService.getPmproAccount($scope.user.data.id);
+      promise.then(function(data){
+        $scope.pmpro = data;
+      });
+
+      $scope.account_modal.show();
+    });
   };
 
 
@@ -93,6 +59,66 @@ angular.module('skyacademy.controllers', [])
     
   };
 
+})
+
+
+// Term of Use
+.controller('TermsCtrl', function($scope, $ionicModal, PostService, $ionicLoading) {
+  $scope.showTerms = function() {
+
+    $ionicLoading.show({
+      template: '<ion-spinner icon="ios-small"></ion-spinner> Loading'
+    });
+
+    $ionicModal.fromTemplateUrl('views/app/terms.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.terms_modal = modal;
+      $scope.terms_modal.show();
+
+      var promise = PostService.getPageContent(3549);
+      promise.then(function(data){
+        $scope.terms = data;
+        $ionicLoading.hide();
+      });
+    });
+  };
+})
+
+
+// Privacy Policy 
+.controller('PolicyCtrl', function($scope, $ionicModal, PostService, $ionicLoading) {
+  $scope.showPolicy = function() {
+
+    $ionicLoading.show({
+      template: '<ion-spinner icon="ios-small"></ion-spinner> Loading'
+    });
+    
+    $ionicModal.fromTemplateUrl('views/app/policy.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.policy_modal = modal;
+      $scope.policy_modal.show();
+
+      var promise = PostService.getPageContent(3556);
+      promise.then(function(data){
+        $scope.policy = data;
+        $ionicLoading.hide();
+      });
+    });
+  };
+})
+
+
+// RATE THIS APP
+.controller('RateAppCtrl', function($scope) {
+  ionic.Platform.ready(function(){
+    $scope.rateApp = function(){
+      console.log(AppRate);
+    };
+  });
 })
 
 
