@@ -112,16 +112,6 @@ angular.module('skyacademy.controllers', [])
 })
 
 
-// RATE THIS APP
-.controller('RateAppCtrl', function($scope) {
-  ionic.Platform.ready(function(){
-    $scope.rateApp = function(){
-      console.log(AppRate);
-    };
-  });
-})
-
-
 // WALKTHROUGH
 .controller('WalkthroughCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
 
@@ -149,8 +139,10 @@ angular.module('skyacademy.controllers', [])
     AuthService.doLogin(user)
     .then(function(user){
       //success
-      $state.go('app.courses');
+      $scope.user.userName = "";
+      $scope.user.password = "";
 
+      $state.go('app.courses');
       $ionicLoading.hide();
     },function(err){
       //err
