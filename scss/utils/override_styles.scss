@@ -66,6 +66,12 @@ videogular vg-buffering .bufferingContainer, [videogular] vg-buffering .bufferin
     height: 40px;
     line-height: 40px;
 }
+.course-view .course-image{
+	max-width: 100%;
+}
 .terms-view ul{
 	margin-bottom: 20px;
+}
+.course-view .scroll-content{
+	background: #e3e3e3;
 }

@@ -1,9 +1,22 @@
 angular.module('skyacademy.controllers', [])
 
 // APP
-.controller('AppCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService, PostService) {
+.controller('AppCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService, PostService, $localstorage) {
 
   $scope.user = AuthService.getUser();
+
+  if( $localstorage.get('layout') ){
+    $scope.layout = $localstorage.get('layout')
+  }else{
+    $scope.layout = "lv";
+  }
+
+  $scope.LayoutChanged = function(layout) {
+      $scope.layout = layout;
+      $localstorage.set('layout', layout);
+  };
+
+
 
   $ionicModal.fromTemplateUrl('views/app/settings.html', {
     scope: $scope,
