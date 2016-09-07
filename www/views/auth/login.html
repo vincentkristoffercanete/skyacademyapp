@@ -3,7 +3,7 @@
     <ion-nav-back-button>
     </ion-nav-back-button>
   </ion-nav-bar>
-  <ion-content class="padding">
+  <ion-content>
     <div class="row form-heading">
       <div class="col col-center">
         <h1 class="form-title"><img class="logo" src="img/logo@3x-white.png"></h1>
@@ -11,7 +11,7 @@
     </div>
     <div class="row form-wrapper">
       <div class="col">
-        <form name="login_form" class="" novalidate>
+        <form name="login_form" class="login_form" novalidate>
           <div class="list">
             <label class="item item-input">
               <input type="text" placeholder="Email or Username" name="user_name" ng-model="user.userName" required>
@@ -19,9 +19,6 @@
             <label class="item item-input">
               <input type="password" placeholder="Password" name="password" ng-model="user.password" required>
             </label>
-            <button type="submit" class="login button button-block" ng-click="doLogin()" ng-disabled="login_form.$invalid">
-              LOG IN
-            </button>
             <p ng-show="error" class="message error">{{error}}</p>
           </div>
         </form>
@@ -31,6 +28,9 @@
           </a>
         </div>
       </div>
+    </div>
+    <div class="bar bar-footer bar-positive">
+      <button class="button button-full button-positive button-login" ng-click="doLogin()" ng-disabled="login_form.$invalid">Log In</button>
     </div>
   </ion-content>
 </ion-view>

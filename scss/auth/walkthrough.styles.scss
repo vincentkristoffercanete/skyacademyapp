@@ -86,4 +86,13 @@
       border-color: rgba(darken($walkthrough-btn-bg-1, 1), .9);
     }
   }
+
+  .bar-footer{
+    padding: 0;
+    height: 50px;
+  }
+  .button-login{
+    margin:0;
+    font-size: 16px;
+  }
 }
