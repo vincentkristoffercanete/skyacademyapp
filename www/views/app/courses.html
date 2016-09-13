@@ -1,5 +1,7 @@
 <ion-view class="course-view">
     <ion-content class="has-header" ion-sticky>
+
+
         <div class="list" ng-if="layout == 'lv'">
         	<div class="item item-divider" ng-if="isloaded == true">19 HSC 2 UNIT MATH</div>
 		    <a ng-repeat="two_unit in two_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : two_unit.ID})">

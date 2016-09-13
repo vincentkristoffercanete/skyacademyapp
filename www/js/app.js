@@ -17,6 +17,7 @@ angular.module('skyacademy', [
   'skyacademy.filters',
   'underscore',
   'ngCordova',
+  'ui.router',
   'ngSanitize',
   'com.2fdevs.videogular',
   'com.2fdevs.videogular.plugins.controls',
@@ -31,7 +32,7 @@ angular.module('skyacademy', [
 
     AuthService.userIsLoggedIn().then(function(response){
       if(response === true){
-        $state.go('app.courses');
+        $state.go('app.home.courses');
       }
       else{
         $state.go('walkthrough');
@@ -118,12 +119,51 @@ angular.module('skyacademy', [
     controller: 'AppCtrl'
   })
 
-  .state('app.courses', {
-    url: '/courses',
+  .state('app.home', {
+    url: '/tabs',
     views: {
       'menuContent': {
+        templateUrl: 'views/app/home.html',
+      }
+    },
+    abstract:true,
+    data: {
+      authenticate: true
+    },
+  })
+
+  .state('app.home.courses', {
+    url: '/courses',
+    views: {
+      'courses': {
         templateUrl: "views/app/courses.html",
         controller: 'CoursesCtrl'
+      }
+    },
+    data: {
+      authenticate: true
+    }
+  })
+
+  .state('app.home.profile', {
+    url: '/profile',
+    views: {
+      'profile': {
+        templateUrl: "views/app/profile.html",
+        controller: 'ProfileCtrl'
+      }
+    },
+    data: {
+      authenticate: true
+    }
+  })
+
+  .state('app.home.settings', {
+    url: '/settings',
+    views: {
+      'settings': {
+        templateUrl: "views/app/settings.html",
+        controller: 'SettingsCtrl'
       }
     },
     data: {
@@ -160,7 +200,7 @@ angular.module('skyacademy', [
 
 ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/courses');
+  $urlRouterProvider.otherwise('/app/tabs/courses');
 })
 
 ;

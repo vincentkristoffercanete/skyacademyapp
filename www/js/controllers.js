@@ -1,77 +1,12 @@
 angular.module('skyacademy.controllers', [])
 
 // APP
-.controller('AppCtrl', function($scope, $ionicActionSheet, $ionicModal, $state, AuthService, PostService, $localstorage) {
-
-  $scope.user = AuthService.getUser();
-
+.controller('AppCtrl', function($scope, AuthService, PostService, $localstorage, $rootScope) {
   if( $localstorage.get('layout') ){
-    $scope.layout = $localstorage.get('layout')
+    $rootScope.layout = $localstorage.get('layout')
   }else{
-    $scope.layout = "lv";
+    $rootScope.layout = "lv";
   }
-
-  $scope.LayoutChanged = function(layout) {
-      $scope.layout = layout;
-      $localstorage.set('layout', layout);
-  };
-
-
-
-  $ionicModal.fromTemplateUrl('views/app/settings.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.settings_modal = modal;
-  });
-
-
-  $scope.showSettings = function() {
-    $scope.settings_modal.show();
-  };
-
-  $scope.showAccount = function() {
-    $ionicModal.fromTemplateUrl('views/app/account.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.account_modal = modal;
-
-      var promise = PostService.getPmproAccount($scope.user.data.id);
-      promise.then(function(data){
-        $scope.pmpro = data;
-      });
-
-      $scope.account_modal.show();
-    });
-  };
-
-
-  // Triggered on a the logOut button click
-  $scope.showLogOutMenu = function() {
-
-      // Show the action sheet
-      var hideSheet = $ionicActionSheet.show({
-        //Here you can add some more buttons
-
-        titleText: 'Are you sure you want to logout?',
-        destructiveText: 'Logout',
-        cancelText: 'Cancel',
-        cancel: function() {
-          // add cancel code..
-        },
-        buttonClicked: function(index) {
-          return true;
-        },
-        destructiveButtonClicked: function(){
-          AuthService.logOut();
-          $scope.settings_modal.hide();
-          $state.go('login');
-        }
-      });
-    
-  };
-
 })
 
 
@@ -80,7 +15,7 @@ angular.module('skyacademy.controllers', [])
   $scope.showTerms = function() {
 
     $ionicLoading.show({
-      template: '<ion-spinner icon="ios-small"></ion-spinner> Loading'
+      template: '<ion-spinner icon="ios-small"></ion-spinner> Loading...'
     });
 
     $ionicModal.fromTemplateUrl('views/app/terms.html', {
@@ -105,7 +40,7 @@ angular.module('skyacademy.controllers', [])
   $scope.showPolicy = function() {
 
     $ionicLoading.show({
-      template: '<ion-spinner icon="ios-small"></ion-spinner> Loading'
+      template: '<ion-spinner icon="ios-small"></ion-spinner> Loading...'
     });
     
     $ionicModal.fromTemplateUrl('views/app/policy.html', {
@@ -155,7 +90,7 @@ angular.module('skyacademy.controllers', [])
       $scope.user.userName = "";
       $scope.user.password = "";
 
-      $state.go('app.courses');
+      $state.go('app.home.courses');
       $ionicLoading.hide();
     },function(err){
       //err
@@ -209,7 +144,7 @@ angular.module('skyacademy.controllers', [])
     AuthService.doRegister(user)
     .then(function(user){
       //success
-      $state.go('app.courses');
+      $state.go('app.home.courses');
       $ionicLoading.hide();
     },function(err){
       //err
@@ -234,6 +169,50 @@ angular.module('skyacademy.controllers', [])
     });
 })
 
+//PROFILE
+.controller('ProfileCtrl', function($scope, $ionicLoading, PostService, AuthService) {
+  $ionicLoading.show({
+    template: '<ion-spinner icon="ios-small"></ion-spinner> Loading Profile'
+  });
+  $scope.user = AuthService.getUser();
+  var promise = PostService.getPmproAccount($scope.user.data.id);
+  promise.then(function(data){
+    $scope.pmpro = data;
+    $ionicLoading.hide();
+  });
+})
+
+//SETTINGS
+.controller('SettingsCtrl', function($scope, $ionicLoading, PostService, AuthService, $localstorage, $ionicActionSheet, $rootScope, $state) {
+
+  $scope.LayoutChanged = function(layout) {
+      $rootScope.layout = layout;
+      $localstorage.set('layout', layout);
+  };
+
+  $scope.showLogOutMenu = function() {
+
+      // Show the action sheet
+      var hideSheet = $ionicActionSheet.show({
+        //Here you can add some more buttons
+
+        titleText: 'Are you sure you want to logout?',
+        destructiveText: 'Logout',
+        cancelText: 'Cancel',
+        cancel: function() {
+          // add cancel code..
+        },
+        buttonClicked: function(index) {
+          return true;
+        },
+        destructiveButtonClicked: function(){
+          AuthService.logOut();
+          $state.go('login');
+        }
+      });
+  };
+})
+
 //EPISODES
 .controller('EpisodesCtrl', function($scope, $rootScope, $stateParams, $state, $http, $ionicLoading, PostService) {
   $ionicLoading.show({
@@ -252,6 +231,9 @@ angular.module('skyacademy.controllers', [])
     $ionicLoading.hide();
   });
 
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+      viewData.enableBack = true;
+  });
 
 })
 
@@ -305,13 +287,13 @@ angular.module('skyacademy.controllers', [])
     });
 
     function ShowHideControlBar(){
-        if(screen.orientation.type == "landscape-primary"){
-          controller.config.plugins.controls.autoHide = true;
-        }
-        if(screen.orientation.type == "portrait-primary"){
-          controller.config.plugins.controls.autoHide = false;
-        }
+      if(screen.orientation.type == "landscape-primary"){
+        controller.config.plugins.controls.autoHide = true;
       }
+      if(screen.orientation.type == "portrait-primary"){
+        controller.config.plugins.controls.autoHide = false;
+      }
+    }
 
   });
 

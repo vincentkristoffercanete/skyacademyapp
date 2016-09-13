@@ -1,16 +1,9 @@
-<ion-modal-view class="settings-view">
-  <ion-header-bar class="bar bar-header bar-positive">
-    <h1 class="title">Settings</h1>
-    <div class="button button-clear" ng-click="settings_modal.hide()"><span class="icon ion-android-close light"></span></div>
-  </ion-header-bar>
+<ion-view class="settings-view">
   <ion-content>
     <ion-list>
       <div class="item item-divider">LAYOUT</div>
       <ion-radio ng-model="layout" ng-value="'lv'" ng-change="LayoutChanged('lv')">List View</ion-radio>
       <ion-radio ng-model="layout" ng-value="'cv'" ng-change="LayoutChanged('cv')">Card View</ion-radio>
-
-      <div class="item item-divider">ACCOUNT</div>
-      <ion-item class="item" href="" ng-click="showAccount()">Account & Membership</ion-item>
 
       <div class="item item-divider">LEGAL</div>
       <ion-item class="item" href="" ng-controller="TermsCtrl" ng-click="showTerms()">Terms of Service</ion-item>
@@ -19,5 +12,9 @@
       <div class="item item-divider">ACTION</div>
       <ion-item class="item" href="" ng-click="showLogOutMenu()">Logout</ion-item>
     </ion-list>
+    
   </ion-content>
-</ion-modal-view>
+  <div class="bar bar-footer">
+      <div class="title">v1.0</div>
+    </div>
+</ion-view>

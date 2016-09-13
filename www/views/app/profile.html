@@ -1,22 +1,15 @@
-<ion-modal-view class="settings-view">
-	<ion-header-bar class="bar bar-header bar-positive">
-	  <h1 class="title">Account</h1>
-	  <button class="button button-clear button-primary" ng-click="account_modal.hide()"><span class="icon ion-android-close light"></span></button>
-	</ion-header-bar>
+<ion-view class="profile-view">
 	<ion-content>
 		<div class="list">
 			<div class="item item-divider">
 				MY ACCOUNT
 			</div>
-			<div class="item">
-				First Name: <span class="item-note">{{user.data.firstname}}<span>
-			</div>
-			<div class="item">
-				Last Name: <span class="item-note">{{user.data.lastname}}<span>
+			<div class="item item-thumbnail-center">
+				<img ng-src="{{user.data.avatar}}">
+				<h2>{{user.data.firstname}} {{user.data.lastname}}</h2>
 			</div>
 			<div class="item">
 				Username: <span class="item-note">{{user.data.username}}<span>
-
 			</div>
 			<div class="item">
 				Email: <span class="item-note">{{user.data.email}}<span>
@@ -38,4 +31,4 @@
 			</div>
 		</div>
 	</ion-content>
-</ion-modal-view>
+</ion-view>
