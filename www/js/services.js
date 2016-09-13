@@ -666,7 +666,7 @@ angular.module('skyacademy.services', [])
 
     window.localStorage.ionWordpress_user = null;
     window.localStorage.ionWordpress_user_avatar = null;
-    // window.localStorage.ionWordpress_bookmarks = null;
+    window.localStorage.layout = null;
   };
 
   //update user avatar from WP
