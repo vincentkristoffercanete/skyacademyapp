@@ -70,9 +70,8 @@ angular.module('skyacademy.controllers', [])
 })
 
 //LOGIN
-.controller('LoginCtrl', function($scope, $state, $ionicLoading, AuthService, PushNotificationsService) {
+.controller('LoginCtrl', function($scope, $state, $ionicLoading, AuthService) {
   $scope.user = {};
-
   $scope.doLogin = function(){
 
     $ionicLoading.show({

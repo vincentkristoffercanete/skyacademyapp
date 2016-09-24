@@ -26,34 +26,32 @@ angular.module('skyacademy', [
   'ion-sticky'
 ])
 
-.run(function($ionicPlatform, AuthService, $rootScope, $state, PushNotificationsService) {
+.run(function($ionicPlatform, AuthService, $rootScope, $state) {
   
-  $ionicPlatform.on("deviceready", function(){
-
-    AuthService.userIsLoggedIn().then(function(response){
-      if(response === true){
-        $state.go('app.home.courses');
-      }
-      else{
-        $state.go('walkthrough');
-      }
-    });
-
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+  $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
     }
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
+                       
+    AuthService.userIsLoggedIn().then(function(response){
+        if(response === true){
+            $state.go('app.home.courses');
+        }
+        else{
+            $state.go('login');
+        }
+    });
 
   });
 
   $ionicPlatform.on("resume", function(){
     AuthService.userIsLoggedIn().then(function(response){
       if(response === false){
-        $state.go('walkthrough');
+        $state.go('login');
       }else{
         AuthService.updateUserAvatar();
       }
@@ -66,7 +64,7 @@ angular.module('skyacademy', [
       AuthService.userIsLoggedIn().then(function(response){
         if(response === false){
           event.preventDefault();
-          $state.go('walkthrough');
+          $state.go('login');
         }
       });
     }
@@ -76,15 +74,6 @@ angular.module('skyacademy', [
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-  .state('walkthrough', {
-    url: "/",
-    templateUrl: "views/auth/walkthrough.html",
-    controller: 'WalkthroughCtrl',
-    data: {
-      authenticate: false
-    }
-  })
-
   .state('register', {
     url: "/register",
     templateUrl: "views/auth/register.html",

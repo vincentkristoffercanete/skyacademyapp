@@ -9,10 +9,18 @@
     .slider
     {
       height: 100%;
+      width: 100% !important;
+      margin: 0 auto;
 
-      .slider-slide
-      {
-        display: table;
+      .slider-slides{
+
+        width: 100% !important;
+
+        .slider-slide
+        {
+          display: table;
+          width: 100% !important;
+        }
       }
     }
 
