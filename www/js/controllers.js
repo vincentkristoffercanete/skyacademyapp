@@ -2,8 +2,8 @@ angular.module('skyacademy.controllers', [])
 
 // APP
 .controller('AppCtrl', function($scope, AuthService, PostService, $localstorage, $rootScope) {
-  if( $localstorage.get('layout') ){
-    $rootScope.layout = $localstorage.get('layout')
+  if( $localstorage.get('layout') == null){
+    $rootScope.layout = $localstorage.get('layout');
   }else{
     $rootScope.layout = "lv";
   }

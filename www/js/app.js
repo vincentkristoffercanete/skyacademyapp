@@ -34,7 +34,7 @@ angular.module('skyacademy', [
         cordova.plugins.Keyboard.disableScroll(true);
     }
     if (window.StatusBar) {
-      StatusBar.styleDefault();
+      StatusBar.styleLightContent();
     }
                        
     AuthService.userIsLoggedIn().then(function(response){
@@ -42,7 +42,7 @@ angular.module('skyacademy', [
             $state.go('app.home.courses');
         }
         else{
-            $state.go('login');
+            $state.go('walkthrough');
         }
     });
 
@@ -51,7 +51,7 @@ angular.module('skyacademy', [
   $ionicPlatform.on("resume", function(){
     AuthService.userIsLoggedIn().then(function(response){
       if(response === false){
-        $state.go('login');
+        $state.go('walkthrough');
       }else{
         AuthService.updateUserAvatar();
       }
@@ -64,7 +64,7 @@ angular.module('skyacademy', [
       AuthService.userIsLoggedIn().then(function(response){
         if(response === false){
           event.preventDefault();
-          $state.go('login');
+          $state.go('walkthrough');
         }
       });
     }
@@ -74,6 +74,15 @@ angular.module('skyacademy', [
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
+  .state('walkthrough', {
+    url: "/",
+    templateUrl: "views/auth/walkthrough.html",
+    controller: 'WalkthroughCtrl',
+    data: {
+      authenticate: false
+    }
+  })
+  
   .state('register', {
     url: "/register",
     templateUrl: "views/auth/register.html",

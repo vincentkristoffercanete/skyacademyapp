@@ -20,6 +20,9 @@
 	color: #ff3b30;
 	font-size: 18px;
 }
+video::-webkit-media-controls {
+    display:none !important;
+}
 .main-menu .heading-item .heading-bg{
 	background: none !important;
 }

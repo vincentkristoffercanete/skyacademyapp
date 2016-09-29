@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.skymaths.skyacademy" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SkyAcademy</name>
+    <name>Sky Academy</name>
     <description>
     Online HSC Math Tutoring Video Courses
     </description>
     <author email="info@skyacademy.com.au" href="https://skyacademy.com.au/">
-    SkyAcademy Team
+    Sky Academy Team
      </author>
     <content src="index.html" />
     <access origin="*" />
@@ -17,15 +17,31 @@
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="Orientation" value="portrait" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="1000" />
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="xwalkVersion" value="19+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
+    <preference name="Fullscreen" value="true"/>
+    <preference name="KeepRunning" value="true"/>
+    <preference name="AutoHideSplashScreen" value="true"/>
+    <preference name="EnableViewportScale" value="false"/>
+    <preference name="FadeSplashScreen" value="true"/>
+    <preference name="FadeSplashScreenDuration" value="250"/>
+    <preference name="KeyboardDisplayRequiresUserAction" value="true"/>
+    <preference name="MediaPlaybackRequiresUserAction" value="false"/>
+    <preference name="ShowSplashScreenSpinner" value="false"/>
+    <preference name="SuppressesIncrementalRendering" value="false"/>
+    <preference name="TopActivityIndicator" value="gray"/>
+    <preference name="GapBetweenPages" value="0"/>
+    <preference name="PageLength" value="0"/>
+    <preference name="PaginationBreakingMode" value="page"/>
+    <preference name="PaginationMode" value="unpaginated"/>
+    
+    
     <platform name="android">
         <icon density="ldpi" src="resources\android\icon\drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources\android\icon\drawable-mdpi-icon.png" />
