@@ -4,7 +4,7 @@
     <ion-content ng-repeat="videos in video | limitTo:1" class="overflow-scroll">
 
         <div class="video-wrapper">
-            <videogular vg-player-ready="controller.onPlayerReady($API)" vg-plays-inline="controller.config.playsInline" vg-auto-play="controller.config.autoPlay" vg-native-fullscreen="false" vg-responsive="true">
+            <videogular vg-player-ready="controller.onPlayerReady($API)" vg-plays-inline="controller.config.playsInline" vg-auto-play="controller.config.autoPlay" vg-native-fullscreen="'false'" vg-responsive="'true'">
                 <vg-media vg-src="controller.config.sources">
                 </vg-media>
                 <vg-controls vg-autohide="controller.config.plugins.controls.autoHide" vg-autohide-time="controller.config.plugins.controls.autoHideTime">
@@ -15,11 +15,11 @@
                     </vg-scrub-bar>
                     <vg-time-display>{{ totalTime | date:'mm:ss':'+0000' }}</vg-time-display>
                     <vg-playback-button></vg-playback-button>
-                    <vg-fullscreen-button ng-if="platform == 'android'"></vg-fullscreen-button>
+                    <vg-fullscreen-button></vg-fullscreen-button>
                 </vg-controls>
                 <vg-buffering></vg-buffering>
 
-                <vg-overlay-play ng-if="platform == 'android'"></vg-overlay-play>
+                <vg-overlay-play></vg-overlay-play>
             </videogular>
         </div>
         

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.skymaths.skyacademy" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.skymaths.skyacademy" version="1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Sky Academy</name>
     <description>
     Online HSC Math Tutoring Video Courses
@@ -25,23 +25,21 @@
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
-    <preference name="Fullscreen" value="true"/>
-    <preference name="KeepRunning" value="true"/>
-    <preference name="AutoHideSplashScreen" value="true"/>
-    <preference name="EnableViewportScale" value="false"/>
-    <preference name="FadeSplashScreen" value="true"/>
-    <preference name="FadeSplashScreenDuration" value="250"/>
-    <preference name="KeyboardDisplayRequiresUserAction" value="true"/>
-    <preference name="MediaPlaybackRequiresUserAction" value="false"/>
-    <preference name="ShowSplashScreenSpinner" value="false"/>
-    <preference name="SuppressesIncrementalRendering" value="false"/>
-    <preference name="TopActivityIndicator" value="gray"/>
-    <preference name="GapBetweenPages" value="0"/>
-    <preference name="PageLength" value="0"/>
-    <preference name="PaginationBreakingMode" value="page"/>
-    <preference name="PaginationMode" value="unpaginated"/>
-    
-    
+    <preference name="Fullscreen" value="true" />
+    <preference name="KeepRunning" value="true" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="FadeSplashScreen" value="true" />
+    <preference name="FadeSplashScreenDuration" value="250" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaPlaybackRequiresUserAction" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="TopActivityIndicator" value="gray" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
     <platform name="android">
         <icon density="ldpi" src="resources\android\icon\drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources\android\icon\drawable-mdpi-icon.png" />

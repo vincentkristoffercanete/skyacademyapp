@@ -269,12 +269,13 @@ angular.module('skyacademy.controllers', [])
         ],
         plugins: {
           controls: {
-              autoHide: false,
+              autoHide: true,
               autoHideTime: 3000
           }
         }
     };
     $ionicLoading.hide();
+
     document.addEventListener("deviceready", function() {
       screen.unlockOrientation();
     });
