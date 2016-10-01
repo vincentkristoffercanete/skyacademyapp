@@ -36,8 +36,15 @@
 
   .form-wrapper
   {
-    height:80%;
-    margin:0px;
+    height: 80%;
+    padding: 0px;
+    margin: 0px;
+
+    form{
+      width: 90%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
   }
 
   .form-title
@@ -132,5 +139,12 @@
       font-weight: 500;
     }
   }
-
+  .bar-footer{
+    padding: 0;
+    height: 50px;
+  }
+  .button-login{
+    margin:0;
+    font-size: 16px;
+  }
 }
