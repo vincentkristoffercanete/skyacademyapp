@@ -237,13 +237,10 @@ angular.module('skyacademy.controllers', [])
 })
 
 //VIDEO
-.controller('VideoCtrl', function($scope, $stateParams, $ionicLoading, PostService, $sce, $ionicNavBarDelegate, $window, $document) {
+.controller('VideoCtrl', function($scope, $stateParams, $ionicLoading, PostService, $sce, $ionicNavBarDelegate) {
   $ionicLoading.show({
     template: '<ion-spinner icon="ios-small"></ion-spinner> Loading Video'
   }); 
-
-  var controller = this;
-  controller.API = null;
 
   var videoId = $stateParams.videoId;
   var promise = PostService.getVideo(videoId);
@@ -254,16 +251,20 @@ angular.module('skyacademy.controllers', [])
     $scope.video[0].content.rendered.replace(urlRegex, function(url) {
         video_src = url.trim();
     });
+
     $scope.platform = ionic.Platform.platform();
     if($scope.platform == 'ios'){
       $ionicNavBarDelegate.showBar(true);
     }else{
       $ionicNavBarDelegate.showBar(false);
     }
-    controller.config = {
+
+    $scope.config = {
         playsInline: true,
-        preload: "auto",
+        preload: "none",
         autoPlay: true,
+        nativeFullscreen: false,
+        responsive: true,
         sources: [
             {src: $sce.trustAsResourceUrl(video_src), type: "video/mp4"}
         ],
@@ -280,21 +281,6 @@ angular.module('skyacademy.controllers', [])
       screen.unlockOrientation();
     });
     
-    ShowHideControlBar();
-      
-    window.addEventListener("orientationchange", function(){
-      ShowHideControlBar();
-    });
-
-    function ShowHideControlBar(){
-      if(screen.orientation.type == "landscape-primary"){
-        controller.config.plugins.controls.autoHide = true;
-      }
-      if(screen.orientation.type == "portrait-primary"){
-        controller.config.plugins.controls.autoHide = false;
-      }
-    }
-
   });
 
 })
