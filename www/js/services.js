@@ -29,7 +29,7 @@ angular.module('skyacademy.services', [])
 
   this.getEpisodes = function(courseId){
     var deferred = $q.defer();
-    $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/unit/?filter[post_parent]='+ courseId +'&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish')
+      $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/unit/?filter[post_parent]=' + courseId + '&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish&filter[posts_per_page]=-1')
     .success(function(data) {
       deferred.resolve(data);
     })

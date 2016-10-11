@@ -37,36 +37,22 @@
     "cordova-plugin-dialogs",
     "cordova-plugin-globalization",
     "cordova-plugin-extension",
-    "cordova-plugin-inappbrowser",
-    "cordova-plugin-whitelist",
-    {
+    "cordova-plugin-whitelist", {
       "locator": "https://github.com/driftyco/ionic-plugins-keyboard.git",
       "id": "ionic-plugin-keyboard"
     },
-    "cordova-plugin-fullscreen",
     "cordova-plugin-screen-orientation",
     "cordova-plugin-splashscreen",
     "cordova-plugin-crosswalk-webview",
-    {
-      "id": "phonegap-plugin-push",
-      "locator": "phonegap-plugin-push",
-      "variables": {
-        "SENDER_ID": "356515480526"
-      }
-    },
-    "cordova-plugin-statusbar",
-    "cordova-plugin-apprate@1.1.12",
-    "cordova-plugin-apprate@1.1.8"
+    "cordova-plugin-statusbar"
   ],
   "cordovaPlatforms": [
     "ios",
-    "android",
-    {
+    "android", {
       "platform": "android",
       "version": "",
       "locator": "android"
-    },
-    {
+    }, {
       "platform": "ios",
       "version": "",
       "locator": "ios"
