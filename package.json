@@ -11,6 +11,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^2.2.14",
     "jshint": "^2.9.2",
+    "node-sass": "^3.10.1",
     "require-dir": "^0.3.0",
     "shelljs": "^0.3.0"
   },
@@ -37,7 +38,8 @@
     "cordova-plugin-dialogs",
     "cordova-plugin-globalization",
     "cordova-plugin-extension",
-    "cordova-plugin-whitelist", {
+    "cordova-plugin-whitelist",
+    {
       "locator": "https://github.com/driftyco/ionic-plugins-keyboard.git",
       "id": "ionic-plugin-keyboard"
     },
@@ -48,11 +50,13 @@
   ],
   "cordovaPlatforms": [
     "ios",
-    "android", {
+    "android",
+    {
       "platform": "android",
       "version": "",
       "locator": "android"
-    }, {
+    },
+    {
       "platform": "ios",
       "version": "",
       "locator": "ios"

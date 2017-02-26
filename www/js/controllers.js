@@ -35,14 +35,14 @@ angular.module('skyacademy.controllers', [])
 })
 
 
-// Privacy Policy 
+// Privacy Policy
 .controller('PolicyCtrl', function($scope, $ionicModal, PostService, $ionicLoading) {
   $scope.showPolicy = function() {
 
     $ionicLoading.show({
       template: '<ion-spinner icon="ios-small"></ion-spinner> Loading...'
     });
-    
+
     $ionicModal.fromTemplateUrl('views/app/policy.html', {
       scope: $scope,
       animation: 'slide-in-up'
@@ -160,11 +160,8 @@ angular.module('skyacademy.controllers', [])
     });
     var promise = PostService.getCourses();
     promise.then(function(data){
-      $scope.two_units = data.courses.two_unit;
-      $scope.bonus_units = data.courses.bonus;
-      $scope.three_units = data.courses.three_unit;
+      $scope.courses = data.courses;
       $ionicLoading.hide();
-      $scope.isloaded = true;
     });
 })
 
@@ -240,7 +237,7 @@ angular.module('skyacademy.controllers', [])
 .controller('VideoCtrl', function($scope, $stateParams, $ionicLoading, PostService, $sce, $ionicNavBarDelegate) {
   $ionicLoading.show({
     template: '<ion-spinner icon="ios-small"></ion-spinner> Loading Video'
-  }); 
+  });
 
   var videoId = $stateParams.videoId;
   var promise = PostService.getVideo(videoId);
@@ -248,7 +245,7 @@ angular.module('skyacademy.controllers', [])
     $scope.video = data;
     var urlRegex = /(https?:\/\/[^\s"]+)/g;
     var video_src = "";
-    $scope.video[0].content.rendered.replace(urlRegex, function(url) {
+    $scope.video[0].content.replace(urlRegex, function(url) {
         video_src = url.trim();
     });
 
@@ -280,7 +277,7 @@ angular.module('skyacademy.controllers', [])
     document.addEventListener("deviceready", function() {
       screen.unlockOrientation();
     });
-    
+
   });
 
 })

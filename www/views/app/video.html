@@ -21,11 +21,11 @@
                 <vg-overlay-play></vg-overlay-play>
             </videogular>
         </div>
-        
+
         <div class="content-padding">
-            <h4 ng-bind-html="video[0].title.rendered | cleanText"></h4>
+            <h4 ng-bind-html="video[0].title | cleanText"></h4>
             <div class="description">
-                <div ng-bind-html="video[1].content.rendered"></div>
+                <div ng-bind-html="video[1].content"></div>
             </div>
         </div>
     </ion-content>

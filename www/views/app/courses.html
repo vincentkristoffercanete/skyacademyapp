@@ -1,67 +1,32 @@
 <ion-view class="course-view">
     <ion-content class="has-header" ion-sticky>
 
+      <div class="list" ng-if="layout == 'lv'">
+          <div ng-repeat="course in courses">
+            <div class="item item-divider">{{ course.heading }}</div>
+    		    <a ng-repeat="row in course.units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : row.ID})">
+    		      <img ng-src="{{ row.featured_image }}">
+    		      <h2 ng-bind-html="row.post_title"></h2>
+    		      <p>{{ row.post_excerpt | htmlToPlaintext | limitTo: 250 }}{{ row.post_excerpt.length > 250 ? '...' : '' }}</p>
+    		     <i class="icon ion-ios-arrow-right"></i>
+    		    </a>
+          </div>
+  		</div>
 
-        <div class="list" ng-if="layout == 'lv'">
-        	<div class="item item-divider" ng-if="isloaded == true">19 HSC 2 UNIT MATH</div>
-		    <a ng-repeat="two_unit in two_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : two_unit.ID})">
-		      <img ng-src="{{two_unit.featured_image}}">
-		      <h2 ng-bind-html="two_unit.post_title"></h2>
-		      <p>{{two_unit.post_excerpt | htmlToPlaintext | limitTo: 250}}{{two_unit.post_excerpt.length > 250 ? '...' : ''}}</p>
-		     <i class="icon ion-ios-arrow-right"></i>
-		    </a>
-
-		    <div class="item item-divider" ng-if="isloaded == true">BONUS</div>
-		    <a ng-repeat="bonus_unit in bonus_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : bonus_unit.ID})">
-		      <img ng-src="{{bonus_unit.featured_image}}">
-		      <h2 ng-bind-html="bonus_unit.post_title"></h2>
-		      <p>{{bonus_unit.post_content | htmlToPlaintext | limitTo: 250}}{{bonus_unit.post_content.length > 250 ? '...' : ''}}</p>
-		     <i class="icon ion-ios-arrow-right"></i>
-		    </a>
-
-		    <div class="item item-divider" ng-if="isloaded == true">HSC EXTENSION 1 MATH</div>
-		    <a ng-repeat="three_unit in three_units" class="item item-thumbnail-left item-icon-right" ui-sref="app.episodes({courseId : three_unit.ID})">
-		      <img ng-src="{{three_unit.featured_image}}">
-		      <h2 ng-bind-html="three_unit.post_title"></h2>
-		      <p>{{three_unit.post_excerpt | htmlToPlaintext | limitTo: 250}}{{three_unit.post_excerpt.length > 250 ? '...' : ''}}</p>
-		     <i class="icon ion-ios-arrow-right"></i>
-		    </a>
-		</div>
-
-		<div class="card-view" ng-if="layout != 'lv'">
-			<div class="item item-divider" ng-if="isloaded == true">19 HSC 2 UNIT MATH</div>
-			<div class="list card" ng-repeat="two_unit in two_units" ui-sref="app.episodes({courseId : two_unit.ID})">
-			  <div class="item">
-			    <h2 ng-bind-html="two_unit.post_title"></h2>
-			  </div>
-			  <div class="item item-body">
-			    <img ng-src="{{two_unit.featured_image}}" class="course-image">
-			    <p>{{two_unit.post_excerpt | htmlToPlaintext }}</p>
-			  </div>
-			</div>
-
-			<div class="item item-divider" ng-if="isloaded == true">BONUS</div>
-			<div class="list card" ng-repeat="bonus_unit in bonus_units" ui-sref="app.episodes({courseId : bonus_unit.ID})">
-			  <div class="item">
-			    <h2 ng-bind-html="bonus_unit.post_title"></h2>
-			  </div>
-			  <div class="item item-body">
-			    <img ng-src="{{bonus_unit.featured_image}}" class="course-image">
-			    <p>{{bonus_unit.post_content | htmlToPlaintext | limitTo: 300}}{{bonus_unit.post_content.length > 300 ? '...' : ''}}</p>
-			  </div>
-			</div>
-
-			<div class="item item-divider" ng-if="isloaded == true">HSC EXTENSION 1 MATH</div>
-			<div class="list card" ng-repeat="three_unit in three_units" ui-sref="app.episodes({courseId : three_unit.ID})">
-			  <div class="item">
-			    <h2 ng-bind-html="three_unit.post_title"></h2>
-			  </div>
-			  <div class="item item-body">
-			    <img ng-src="{{three_unit.featured_image}}" class="course-image">
-			    <p>{{three_unit.post_excerpt | htmlToPlaintext }}</p>
-			  </div>
-			</div>
-		</div>
+  		<div class="card-view" ng-if="layout != 'lv'">
+        <div ng-repeat="course in courses">
+    			<div class="item item-divider">{{ course.heading }}</div>
+    			<div class="list card" ng-repeat="row in course.units" ui-sref="app.episodes({courseId : row.ID})">
+    			  <div class="item">
+    			    <h2 ng-bind-html="row.post_title"></h2>
+    			  </div>
+    			  <div class="item item-body">
+    			    <img ng-src="{{ row.featured_image }}" class="course-image">
+    			    <p>{{ row.post_excerpt | htmlToPlaintext }}</p>
+    			  </div>
+    			</div>
+        </div>
+  		</div>
 
     </ion-content>
 </ion-view>

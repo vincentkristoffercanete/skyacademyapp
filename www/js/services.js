@@ -29,9 +29,11 @@ angular.module('skyacademy.services', [])
 
   this.getEpisodes = function(courseId){
     var deferred = $q.defer();
-      $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/unit/?filter[post_parent]=' + courseId + '&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish&filter[posts_per_page]=-1')
+    $http.jsonp(WORDPRESS_API_URL + 'get_posts/?post_type=unit&post_parent='+courseId+'&post_status=publish&order=ASC&orderby=ID&posts_per_page=-1'+
+    '&insecure=cool' +
+    '&callback=JSON_CALLBACK')
     .success(function(data) {
-      deferred.resolve(data);
+      deferred.resolve(data.posts);
     })
     .error(function(data) {
       deferred.reject(data);
@@ -41,9 +43,11 @@ angular.module('skyacademy.services', [])
 
   this.getVideo = function(videoId){
     var deferred = $q.defer();
-    $http.get(WORDPRESS_SITE_URL + 'wp-json/wp/v2/module/?filter[post_parent]='+ videoId +'&filter[order]=ASC&filter[orderby]=ID&filter[post_status]=publish')
+    $http.jsonp(WORDPRESS_API_URL + 'get_posts/?post_type=module&post_parent='+videoId+'&post_status=publish&order=ASC&orderby=ID&posts_per_page=-1'+
+    '&insecure=cool' +
+    '&callback=JSON_CALLBACK')
     .success(function(data) {
-      deferred.resolve(data);
+      deferred.resolve(data.posts);
     })
     .error(function(data) {
       deferred.reject(data);
@@ -271,7 +275,7 @@ angular.module('skyacademy.services', [])
         results_deferred = $q.defer();
 
     //get all tags and filter the ones with the query in the title
-    $http.jsonp(WORDPRESS_API_URL + 'get_tag_index/' + 
+    $http.jsonp(WORDPRESS_API_URL + 'get_tag_index/' +
     '?callback=JSON_CALLBACK' + '&insecure=cool')
     .success(function(data) {
       var tags = _.filter(data.tags, function(tag){

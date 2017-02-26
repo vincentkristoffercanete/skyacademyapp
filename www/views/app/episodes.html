@@ -2,10 +2,10 @@
     <ion-content class="has-header" ion-sticky>
         <div class="list">
         	<div class="item item-divider">{{course.title.rendered | uppercase}}</div>
-		    <a ng-repeat="episode in episodes" class="item item-icon-right" ui-sref="app.video({videoId : episode.id})">
-		      <h2 ng-bind-html="episode.title.rendered | cleanText"></h2>
-		      <i class="icon ion-ios-arrow-right"></i>
-		    </a>
+		      <a ng-repeat="episode in episodes" class="item item-icon-right" ui-sref="app.video({videoId : episode.id})">
+  		      <h2 ng-bind-html="episode.title | cleanText"></h2>
+  		      <i class="icon ion-ios-arrow-right"></i>
+  		    </a>
 		</div>
     </ion-content>
 </ion-view>
